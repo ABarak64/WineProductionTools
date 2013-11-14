@@ -18,36 +18,7 @@
 <div id="main-content">
 @if (@User.Identity.IsAuthenticated)
 {
-    <p class="error" data-bind="text: error"></p>
-    <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
-    <button data-bind="click: addTodoList">Add Todo list</button>
-
-    <section id="lists" data-bind="foreach: todoLists, visible: todoLists().length > 0">
-        <article class="todoList">
-            <header>
-                <form data-bind="validate: true">
-                    <input class="required" data-bind="value: title, selected: isEditingListTitle, blurOnEnter: true" />
-                </form>
-            </header>
-
-            <a href="#" class="deletelist" data-bind="click: $parent.deleteTodoList">X</a>
-
-            <ul data-bind="foreach: todos">
-                <li>
-                    <input type="checkbox" data-bind="checked: isDone" />
-                    <input class="todoItemInput" type="text" data-bind="value: title, disable: isDone, blurOnEnter: true" />
-                    <a href="#" data-bind="click: $parent.deleteTodo">X</a>
-                    <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
-                </li>
-            </ul>
-
-            <form data-bind="submit: addTodo">
-                <input class="addTodo" type="text" data-bind="value: newTodoTitle, placeholder: 'Type here to add', blurOnEnter: true, event: { blur: addTodo }" />
-            </form>
-
-            <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
-        </article>
-    </section>
+    <p id="stuff">LOADING...</p>
 }
 else
 {
@@ -73,8 +44,17 @@ else
 @if (@User.Identity.IsAuthenticated)
 {
     @section scripts {
-        @Scripts.Render("~/bundles/knockout")
         @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/todo")
+        <script type="text/javascript">
+            $(document).ready(function () {
+                console.log('im authenticated!');
+
+                $.getJSON('/api/TodoList',
+                    function (data) {
+                        $('#stuff').text(JSON.stringify(data));
+                        console.log(JSON.stringify(data));
+                });
+            });
+        </script>
     }
 }
