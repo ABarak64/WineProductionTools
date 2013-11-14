@@ -1,6 +1,6 @@
 ﻿@model WineProdTools.Models.LoginModel
 @{
-    ViewBag.Title = "My Todo List";
+    ViewBag.Title = "Wine Production Tools";
 }
 @functions{
     public string GetAntiForgeryToken()
@@ -23,14 +23,8 @@
 else
 {
     <div class="todoList" id="loginPanel">
-        <section id="localLoginPanel">
-            <h2>Log in</h2>
-            @Html.Partial("_Login")
-        </section>
-        <section id="socialLoginPanel">
-            <h2>Log in using another service</h2>
-            @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+        <h2>Log in</h2>
+        @Html.Partial("_Login")
         <p>First time here? <a id="showRegister">Sign up</a></p>
     </div>
     <div class="todoList" id="registerPanel">
