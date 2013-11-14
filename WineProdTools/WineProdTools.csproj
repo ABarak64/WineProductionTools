@@ -310,10 +310,6 @@
     <Content Include="Content\TodoList.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\app\ajaxlogin.js" />
-    <Content Include="Scripts\app\todo.viewmodel.js" />
-    <Content Include="Scripts\app\todo.bindings.js" />
-    <Content Include="Scripts\app\todo.datacontext.js" />
-    <Content Include="Scripts\app\todo.model.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
