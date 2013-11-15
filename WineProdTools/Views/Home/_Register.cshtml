@@ -8,19 +8,16 @@
         <legend>Registration Form</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName, new { id = "registerName" })
+                @Html.TextBoxFor(m => m.UserName, new { id = "registerName", @class = "form-control", placeholder = "User Name"})
             </li>
             <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
             </li>
             <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
             </li>
             <li>
-                <input type="submit" value="Sign up" />
+                <input type="submit" value="Sign up" class="btn"/>
             </li>
         </ol>
         @Html.ValidationSummary()

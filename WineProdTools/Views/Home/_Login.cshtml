@@ -8,21 +8,19 @@
         <legend>Log in Form</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName, new { autofocus = "autofocus", id = "loginName" })
+                @Html.TextBoxFor(m => m.UserName, new { autofocus = "autofocus", id = "loginName", @class = "form-control", placeholder = "User Name" })
                 @Html.ValidationMessageFor(m => m.UserName)
             </li>
             <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
                 @Html.ValidationMessageFor(m => m.Password)
             </li>
             <li>
                 @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                @Html.LabelFor(m => m.RememberMe)
             </li>
             <li>
-                <input type="submit" value="Log in" />
+                <input type="submit" class="btn" value="Log in" />
             </li>
         </ol>
         @Html.ValidationSummary() 

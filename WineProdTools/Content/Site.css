@@ -164,7 +164,6 @@ fieldset {
     }
 
     fieldset label:not(.checkbox) {
-        display: block;
         text-align: left;
     }
 
