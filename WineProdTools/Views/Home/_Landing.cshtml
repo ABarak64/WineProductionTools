@@ -1,0 +1,39 @@
+﻿<div class="jumbotron">
+    <div class="container">
+        <h1>Wine Production Tools</h1>
+        <p>A new way to manage and visualize the data of your winery.</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Welcome!</h2>
+            <p>We are currently in Open Preview, so please take a look at what tools we have to offer the various portions of wine production. </p>
+        </div>
+        <div class="col-md-4">
+            <div id="loginPanel">
+                <h2>Log in</h2>
+                @Html.Partial("_Login")
+                <p>First time here? <a id="showRegister">Sign up</a></p>
+                <p>Forgot your password? <a id="showReset">Reset it via email</a></p>
+            </div>
+            <div id="registerPanel">
+                <h2>Sign up</h2>
+                @Html.Partial("_Register")
+                <p>Already signed up? <a id="showLogin">Log in</a></p>
+            </div>
+            <div id="resetPanel">
+                <h2>Reset Password</h2>
+                @Html.Partial("_Reset")
+                <p><a id="backToLogin">Back to log in</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Contact</h2>
+            <p>Questions? Comments? Let us know what features you would like to see.</p>
+            <a href="mailto:adam.barak.64@gmail.com">adam.barak.64@gmail.com</a>
+        </div>
+    </div>
+</div>

@@ -1,53 +1,31 @@
 ﻿@model WineProdTools.Models.LoginModel
-@{
-    ViewBag.Title = "Wine Production Tools";
-}
+
 @functions{
     public string GetAntiForgeryToken()
     {
         string cookieToken, formToken;
         AntiForgery.GetTokens(null, out cookieToken, out formToken);
-        return cookieToken + ":" + formToken;                
+        return cookieToken + ":" + formToken;
     }
 }
 
-<header>
-    <h1>@ViewBag.Title</h1>
-</header>
-
-<div id="main-content">
 @if (@User.Identity.IsAuthenticated)
 {
+    <text>
+        Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: new { area = "" }, htmlAttributes: new { @class = "username", title = "Manage" })
+        @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        }
+    </text>
+    
     <p id="stuff">LOADING...</p>
-}
-else
-{
-    <div id="loginPanel">
-        <h2>Log in</h2>
-        @Html.Partial("_Login")
-        <p>First time here? <a id="showRegister">Sign up</a></p>
-        <p>Forgot your password? <a id="showReset">Reset it via email</a></p>
-    </div>
-    <div id="registerPanel">
-        <h2>Sign up</h2>
-        @Html.Partial("_Register")
-        <p>Already signed up? <a id="showLogin">Log in</a></p>
-    </div>
-    <div id="resetPanel">
-        <h2>Reset Password</h2>
-        @Html.Partial("_Reset")
-        <p><a id="backToLogin">Back to log in</a></p>
-    </div>
-}
-</div>
-
-@if (@User.Identity.IsAuthenticated)
-{
+    
     @section scripts {
         @Scripts.Render("~/bundles/jqueryval")
         <script type="text/javascript">
             $(document).ready(function () {
-                console.log('im authenticated!');
 
                 $.getJSON('/api/TodoList',
                     function (data) {
@@ -57,4 +35,8 @@ else
             });
         </script>
     }
+}
+else
+{
+    @Html.Partial("_Landing")
 }

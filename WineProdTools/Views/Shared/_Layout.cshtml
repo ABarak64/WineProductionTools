@@ -10,13 +10,7 @@
     @Styles.Render("~/Content/themes/base/css")
 </head>
 <body>
-    <div id="userSettings">
-        @Html.Partial("_UserSettings")
-    </div>
-
-    <div id="body">
-        @RenderBody()
-    </div>
+    @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
