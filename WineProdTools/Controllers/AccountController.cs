@@ -32,7 +32,7 @@ namespace WineProdTools.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError("", "The email or password provided is incorrect.");
                 }
             }
 
@@ -73,6 +73,45 @@ namespace WineProdTools.Controllers
                 catch (MembershipCreateUserException e)
                 {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            // If we got this far, something failed
+            return Json(new { errors = GetErrorsFromModelState() });
+        }
+
+        //
+        // POST: /Account/JsonRegister
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult JsonReset(ResetModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to reset user password.
+                try
+                {
+                    var token = WebSecurity.GeneratePasswordResetToken(model.UserName);
+                    var newPassword = Membership.GeneratePassword(12, 4);
+                    WebSecurity.ResetPassword(token, newPassword);
+
+                    var client = new System.Net.Mail.SmtpClient();
+                    var msg = new System.Net.Mail.MailMessage("noreply@wineproductiontools.apphb.com", model.UserName,
+                        "Your New Wine Production Tools Password",
+                        "Your new password for the Wine Production Tools account associated with this email address is " + newPassword);
+                    client.Send(msg);
+
+                    return Json(new { success = true, message = "Password successfully changed and sent via email." });
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+                // If the email posted is not in the system.
+                catch (InvalidOperationException e)
+                {
+                    ModelState.AddModelError("", e.Message);
                 }
             }
 
@@ -267,7 +306,7 @@ namespace WineProdTools.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
+                        ModelState.AddModelError("UserName", "Email already exists. Please enter a different email.");
                     }
                 }
             }

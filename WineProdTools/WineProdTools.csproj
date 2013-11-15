@@ -313,6 +313,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\_Login.cshtml" />
     <Content Include="Views\Home\_Register.cshtml" />
+    <Content Include="Views\Home\_Reset.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

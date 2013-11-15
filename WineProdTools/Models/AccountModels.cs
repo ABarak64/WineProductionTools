@@ -58,7 +58,9 @@ namespace WineProdTools.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        [Display(Name = "User Email")]
         public string UserName { get; set; }
 
         [Required]
@@ -70,10 +72,21 @@ namespace WineProdTools.Models
         public bool RememberMe { get; set; }
     }
 
+    public class ResetModel
+    {
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        [Display(Name = "User Email")]
+        public string UserName { get; set; }
+    }
+
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        [Display(Name = "User Email")]
         public string UserName { get; set; }
 
         [Required]

@@ -13,7 +13,7 @@
     <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
     <p>@Html.ActionLink("Back to my Wine Production Tools", "Index", "Home")</p>
 
-    <section class="todoList">
+    <section>
     @if (ViewBag.HasLocalPassword)
     {
         @Html.Partial("_ChangePasswordPartial")

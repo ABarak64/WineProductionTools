@@ -90,7 +90,7 @@ header {
     margin-bottom: .8em;
 }
 
-#registerPanel{
+#registerPanel, #resetPanel {
     display: none;
     position: relative;
     float: left;
@@ -107,20 +107,23 @@ header {
 }
 
 #registerPanel h2,
-#loginPanel h2 {
+#loginPanel h2,
+#resetPanel h2 {
     padding-bottom: .5em;
     margin: 0;
 }
 
 #registerPanel a,
-#loginPanel a {
+#loginPanel a,
+#resetPanel a {
     color: navy;
     font-weight: bold;
     cursor: pointer;
 }
 
 #registerPanel p,
-#loginPanel p {
+#loginPanel p,
+#resetPanel p {
     clear: both;
 }
 

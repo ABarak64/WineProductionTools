@@ -8,7 +8,7 @@
         <legend>Log in Form</legend>
         <ol>
             <li>
-                @Html.TextBoxFor(m => m.UserName, new { autofocus = "autofocus", id = "loginName", @class = "form-control", placeholder = "User Name" })
+                @Html.TextBoxFor(m => m.UserName, new { autofocus = "autofocus", id = "loginName", @class = "form-control", placeholder = "Email" })
                 @Html.ValidationMessageFor(m => m.UserName)
             </li>
             <li>

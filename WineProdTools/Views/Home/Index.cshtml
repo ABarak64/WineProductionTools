@@ -22,15 +22,21 @@
 }
 else
 {
-    <div class="todoList" id="loginPanel">
+    <div id="loginPanel">
         <h2>Log in</h2>
         @Html.Partial("_Login")
         <p>First time here? <a id="showRegister">Sign up</a></p>
+        <p>Forgot your password? <a id="showReset">Reset it via email</a></p>
     </div>
-    <div class="todoList" id="registerPanel">
+    <div id="registerPanel">
         <h2>Sign up</h2>
         @Html.Partial("_Register")
         <p>Already signed up? <a id="showLogin">Log in</a></p>
+    </div>
+    <div id="resetPanel">
+        <h2>Reset Password</h2>
+        @Html.Partial("_Reset")
+        <p><a id="backToLogin">Back to log in</a></p>
     </div>
 }
 </div>

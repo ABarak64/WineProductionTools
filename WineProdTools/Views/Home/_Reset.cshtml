@@ -1,0 +1,20 @@
+﻿@model WineProdTools.Models.ResetModel
+
+@using (Html.BeginForm("JsonReset", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { Id = "resetForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>Reset Password Form</legend>
+        <ol>
+            <li>
+                @Html.TextBoxFor(m => m.UserName, new { id = "resetName", @class = "form-control", placeholder = "Email"})
+            </li>
+            <li>
+                <input type="submit" value="Reset" class="btn"/>
+            </li>
+        </ol>
+        @Html.ValidationSummary()
+    </fieldset>
+}
+    
