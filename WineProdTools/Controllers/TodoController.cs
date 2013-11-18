@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Data.Entity.Infrastructure;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -9,6 +8,7 @@ using WineProdTools.Models;
 
 namespace WineProdTools.Controllers
 {
+    /*
     [Authorize]
     [ValidateHttpAntiForgeryToken]
     public class TodoController : ApiController
@@ -126,4 +126,5 @@ namespace WineProdTools.Controllers
             base.Dispose(disposing);
         }
     }
+     * */
 }

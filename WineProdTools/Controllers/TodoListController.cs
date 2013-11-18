@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,6 +10,7 @@ using WineProdTools.Models;
 
 namespace WineProdTools.Controllers
 {
+    /*
     [Authorize]
     public class TodoListController : ApiController
     {
@@ -136,4 +136,5 @@ namespace WineProdTools.Controllers
             base.Dispose(disposing);
         }
     }
+     */
 }

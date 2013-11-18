@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WineProdTools.Models;
+using WebMatrix.WebData;
 
 namespace WineProdTools
 {
@@ -23,6 +26,10 @@ namespace WineProdTools
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            if (!WebSecurity.Initialized)
+                WebSecurity.InitializeDatabaseConnection("DefaultConnection",
+                     "UserProfile", "UserId", "UserName", autoCreateTables: true);
         }
     }
 }

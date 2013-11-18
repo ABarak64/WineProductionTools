@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 
 namespace WineProdTools.Models
-{
+{/*
     // You can add custom code to this file. Changes will not be overwritten.
     // 
     // If you want Entity Framework to drop and regenerate your database
@@ -23,4 +23,5 @@ namespace WineProdTools.Models
         public DbSet<TodoItem> TodoItems { get; set; }
         public DbSet<TodoList> TodoLists { get; set; }
     }
+  */
 }
