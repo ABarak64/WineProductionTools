@@ -1,4 +1,6 @@
-﻿body, input, button {
+﻿/* Sign in page styling */
+
+body, input, button {
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     font-size: 1.6em;
 }
@@ -6,6 +8,10 @@
 body {
     background-color: #fff;
     color: #333;
+}
+
+.signInRow {
+    min-height: 325px;
 }
 
 button, input[type=submit] {
