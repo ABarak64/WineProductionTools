@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using WineProdTools.Data.EntityModels;
 
 namespace WineProdTools.Data
 {
@@ -18,6 +19,7 @@ namespace WineProdTools.Data
         public int UserId { get; set; }
         public string UserName { get; set; }
         public Int64? AccountId { get; set; }
+        public virtual Account Account { get; set; }
     }
 
     public class RegisterExternalLoginModel
