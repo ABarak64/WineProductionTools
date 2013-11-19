@@ -19,7 +19,7 @@ namespace WineProdTools.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<WineProdToolsContext, Configuration>());
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder); 
         }
     }
 }
