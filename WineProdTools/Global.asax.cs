@@ -9,6 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using WineProdTools.Models;
 using WebMatrix.WebData;
+using WineProdTools.Data;
 
 namespace WineProdTools
 {
@@ -26,6 +27,8 @@ namespace WineProdTools
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            WineProdToolsDataInitializer.Init();
 
             if (!WebSecurity.Initialized)
                 WebSecurity.InitializeDatabaseConnection("DefaultConnection",

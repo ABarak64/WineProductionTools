@@ -17,7 +17,7 @@ namespace WineProdTools.Data.Managers
         {
             using (var db = new WineProdToolsContext())
             {
-                var newAccount = new Account();
+                var newAccount = new Account { Name = "My Winery", Active = true };
                 db.Accounts.Add(newAccount);
                 db.SaveChanges();
                 var user = db.UserProfiles.Single(u => u.UserName == userName);
