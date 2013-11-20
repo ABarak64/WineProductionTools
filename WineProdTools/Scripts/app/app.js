@@ -2,7 +2,7 @@
 
 var app = angular.module('wineProductionToolsApp', ['ngRoute']);
 
-app.config(function ($routeProvider) {
+app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'Scripts/app/views/dashboard.html',
@@ -15,4 +15,4 @@ app.config(function ($routeProvider) {
         .otherwise({
             redirectTo: '/'
         });
-});
+}]);
