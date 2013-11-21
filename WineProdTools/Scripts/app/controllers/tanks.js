@@ -1,3 +1,5 @@
 ﻿'use strict';
 
-app.controller('TanksCtrl', function ($scope) { });
+app.controller('TanksCtrl', ['$scope', function ($scope) {
+    $scope.tanks = [{ id: 1, name: 'bleh' }, { id: 2, name: 'mah' }];
+}]);
