@@ -4,26 +4,15 @@ app.directive('tankCanvas', function () {
     return {
         restrict: 'E',
         scope: {
-            tanks: '='
+            tanks: '=',
+            movedTank: '='
         },
         templateUrl: 'Scripts/app/views/partials/tankCanvas.html',
         controller: ['$scope', function ($scope) {
 
-            $scope.click = function () {
-                angular.forEach($scope.tanks, function (tank) {
-                    console.log(tank);
-                });
-            };
-
-            $scope.$watch('tanks.length', function (newVal, oldVal) {
-                console.log('tanks length has changed');
-            });
-
             // The controller injects all the tank data initially.
             $scope.$watch('tanks', function (newVal, oldVal) {
-                console.log('tanks have changed for directive');
                 angular.forEach(newVal, function (tank) {
-                    console.log(tank);
                     $scope.drawTank(tank.id, tank.name, tank.xPosition, tank.yPosition);
                 });
             });
@@ -68,14 +57,12 @@ app.directive('tankCanvas', function () {
                 });
 
                 layer.on('dragend', function () {
-                    console.log('finished dragging');
-                    console.log(circle.getAbsolutePosition().x);
-                    console.log(circle.attrs.id);
-                    var tankMoved = $scope.tanks.filter(function (tank) {
+                    var moved = $scope.tanks.filter(function (tank) {
                         return tank.id === circle.attrs.id;
                     })[0];
-                    tankMoved.xPosition = circle.getAbsolutePosition().x;
-                    tankMoved.yPosition = circle.getAbsolutePosition().y;
+                    moved.xPosition = circle.getAbsolutePosition().x;
+                    moved.yPosition = circle.getAbsolutePosition().y;
+                    $scope.movedTank = moved;
                     $scope.$apply();
                 });
 

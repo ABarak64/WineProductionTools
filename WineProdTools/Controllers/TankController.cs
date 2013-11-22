@@ -18,5 +18,40 @@ namespace WineProdTools.Controllers
             var mgr = new TankManager();
             return mgr.GetTanksForAccount(((CustomPrincipal)User).AccountId);
         }
+
+        public HttpResponseMessage PostTank(TankDto tankDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            var mgr = new TankManager();
+            var id = mgr.AddTankForAccount(tankDto, ((CustomPrincipal)User).AccountId);
+            tankDto.Id = id;
+
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, tankDto);
+            response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = id }));
+            return response;
+        }
+
+        public HttpResponseMessage PutTank(TankDto tankDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            var mgr = new TankManager();
+            try
+            {
+                mgr.UpdateTankForAccount(tankDto, ((CustomPrincipal)User).AccountId);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Security.Authentication.AuthenticationException e)
+            {
+                // Trying to modify a record that does not belong to the user
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+        }
     }
 }

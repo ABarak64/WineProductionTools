@@ -2,21 +2,16 @@
 
 app.controller('TanksCtrl', ['$scope', 'Tanks', function ($scope, Tanks) {
 
-    $scope.newTank = function () {
-        $scope.tanks.push({
-            id: 10,
-            name: 'new tank',
-            posx: 100,
-            posy: 100
-        });
-    };
+    $scope.movedTank = null;
 
     Tanks.getTanks().success(function (data) {
         $scope.tanks = data;
     });
         
-    $scope.$watch('tanks', function (newVal, oldVal) {
-        console.log('tanks have changed for controller');
+    $scope.$watch('movedTank', function (updatedTank, oldVal) {
+        if (updatedTank !== null) {
+            Tanks.updateTank(updatedTank);
+        }
     }, true);
 
 }]);

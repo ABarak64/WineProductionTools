@@ -15,6 +15,8 @@ namespace WineProdTools.Data.DtoModels
         public int XPosition { get; set; }
         public int YPosition { get; set; }
 
+        public TankDto() { }
+
         public TankDto(Tank tank)
         {
             this.Id = tank.Id;

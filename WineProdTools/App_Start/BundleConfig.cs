@@ -25,11 +25,11 @@ namespace WineProdTools
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/app/app.js",
-                "~/Scripts/app/directives/tankCanvas.js",
                 "~/Scripts/app/services/tanks.js",
                 "~/Scripts/app/controllers/addtank.js",
                 "~/Scripts/app/controllers/dashboard.js",
-                "~/Scripts/app/controllers/tanks.js"));
+                "~/Scripts/app/controllers/tanks.js",
+                "~/Scripts/app/directives/tankCanvas.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
