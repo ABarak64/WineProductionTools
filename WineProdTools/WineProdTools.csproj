@@ -193,6 +193,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Membership\CustomPrincipal.cs" />
+    <Compile Include="Membership\CustomPrincipalSerializedModel.cs" />
+    <Compile Include="Membership\ICustomPrincipal.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\TodoItemDto.cs" />
     <Compile Include="Models\TodoListDto.cs" />

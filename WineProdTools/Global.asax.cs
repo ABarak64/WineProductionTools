@@ -10,6 +10,9 @@ using System.Web.Routing;
 using WineProdTools.Models;
 using WebMatrix.WebData;
 using WineProdTools.Data;
+using System.Web.Script.Serialization;
+using WineProdTools.Membership;
+using System.Web.Security;
 
 namespace WineProdTools
 {
@@ -33,6 +36,24 @@ namespace WineProdTools
             if (!WebSecurity.Initialized)
                 WebSecurity.InitializeDatabaseConnection("DefaultConnection",
                      "UserProfile", "UserId", "UserName", autoCreateTables: true);
+        }
+
+        protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                if (authTicket.UserData == "OAuth") return;
+                CustomPrincipalSerializedModel serializeModel =
+                  serializer.Deserialize<CustomPrincipalSerializedModel>(authTicket.UserData);
+                CustomPrincipal newUser = new CustomPrincipal(authTicket.Name);
+                newUser.UserId = serializeModel.UserId;
+                newUser.AccountId = serializeModel.AccountId;
+                HttpContext.Current.User = newUser;
+                System.Threading.Thread.CurrentPrincipal = HttpContext.Current.User;
+            }
         }
     }
 }

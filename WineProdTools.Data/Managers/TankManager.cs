@@ -9,15 +9,10 @@ namespace WineProdTools.Data.Managers
 {
     public class TankManager
     {
-        public IEnumerable<TankDto> GetTanksForUser(string userId)
+        public IEnumerable<TankDto> GetTanksForAccount(Int64 accountId)
         {
             using (var db = new WineProdToolsContext())
             {
-                var accountId = db.UserProfiles
-                    .Where(u => u.UserName == userId)
-                    .Select(u => u.AccountId)
-                    .SingleOrDefault() ?? 0;
-
                 return db.Tanks
                     .Where(t => t.AccountId == accountId && t.DateDeleted == null)
                     .AsEnumerable()

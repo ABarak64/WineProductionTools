@@ -51,6 +51,7 @@
     <Compile Include="EntityModels\Account.cs" />
     <Compile Include="EntityModels\Tank.cs" />
     <Compile Include="Managers\TankManager.cs" />
+    <Compile Include="Managers\UserManager.cs" />
     <Compile Include="SimpleMembership.cs" />
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />

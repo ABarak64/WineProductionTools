@@ -11,12 +11,33 @@ using WineProdTools.Filters;
 using WineProdTools.Models;
 using WineProdTools.Data.Managers;
 using WineProdTools.Data;
+using System.Web;
+using WineProdTools.Membership;
+using System.Web.Script.Serialization;
 
 namespace WineProdTools.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+
+        public void CreateAuthenticationTicket(string userId)
+        {
+            var mgr = new UserManager();
+            var authUser = mgr.GetUserFromUserId(userId);
+            CustomPrincipalSerializedModel serializeModel = new CustomPrincipalSerializedModel();
+
+            serializeModel.UserId = authUser.UserName;
+            serializeModel.AccountId = (Int64)authUser.AccountId;
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string userData = serializer.Serialize(serializeModel);
+
+            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
+              1, userId, DateTime.Now, DateTime.Now.AddDays(7), false, userData);
+            string encTicket = FormsAuthentication.Encrypt(authTicket);
+            HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+            Response.Cookies.Add(faCookie);
+        }
         //
         // POST: /Account/JsonLogin
 
@@ -28,7 +49,7 @@ namespace WineProdTools.Controllers
             {
                 if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    CreateAuthenticationTicket(model.UserName);
                     return Json(new { success = true, redirect = returnUrl });
                 }
                 else
@@ -70,7 +91,7 @@ namespace WineProdTools.Controllers
                     var acctMgr = new AccountManager();
                     acctMgr.Create(model.UserName);
 
-                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                    CreateAuthenticationTicket(model.UserName);
                     return Json(new { success = true, redirect = returnUrl });
                 }
                 catch (MembershipCreateUserException e)
@@ -96,7 +117,7 @@ namespace WineProdTools.Controllers
                 try
                 {
                     var token = WebSecurity.GeneratePasswordResetToken(model.UserName);
-                    var newPassword = Membership.GeneratePassword(12, 4);
+                    var newPassword = System.Web.Security.Membership.GeneratePassword(12, 4);
                     WebSecurity.ResetPassword(token, newPassword);
 
                     var client = new System.Net.Mail.SmtpClient();
@@ -254,6 +275,7 @@ namespace WineProdTools.Controllers
 
             if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
             {
+                CreateAuthenticationTicket(OAuthWebSecurity.GetUserName(result.Provider, result.ProviderUserId));
                 return RedirectToLocal(returnUrl);
             }
 
@@ -261,6 +283,7 @@ namespace WineProdTools.Controllers
             {
                 // If the current user is logged in add the new account
                 OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
+                CreateAuthenticationTicket(User.Identity.Name);
                 return RedirectToLocal(returnUrl);
             }
             else
