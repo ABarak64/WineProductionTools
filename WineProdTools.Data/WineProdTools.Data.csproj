@@ -47,7 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DtoModels\TankDto.cs" />
     <Compile Include="EntityModels\Account.cs" />
+    <Compile Include="EntityModels\Tank.cs" />
+    <Compile Include="Managers\TankManager.cs" />
     <Compile Include="SimpleMembership.cs" />
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />

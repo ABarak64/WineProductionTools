@@ -32,6 +32,10 @@ button, input[type=submit] {
     padding-left: 10px;
 }
 
+h2 {
+    margin-bottom: 40px;
+}
+
 /*#region forms */
 
 #changePasswordForm input,

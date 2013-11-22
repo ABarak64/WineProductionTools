@@ -26,6 +26,8 @@ namespace WineProdTools
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/app/app.js",
                 "~/Scripts/app/directives/tankCanvas.js",
+                "~/Scripts/app/services/tanks.js",
+                "~/Scripts/app/controllers/addtank.js",
                 "~/Scripts/app/controllers/dashboard.js",
                 "~/Scripts/app/controllers/tanks.js"));
 

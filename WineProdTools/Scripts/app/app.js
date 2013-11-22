@@ -12,6 +12,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'Scripts/app/views/tanks.html',
             controller: 'TanksCtrl'
         })
+        .when('/addtank', {
+            templateUrl: 'Scripts/app/views/addtank.html',
+            controller: 'AddTankCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
