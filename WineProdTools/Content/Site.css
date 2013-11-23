@@ -170,8 +170,9 @@ ol.round {
 .validation-summary-errors {
     color: red;
     list-style: none;
-    width: 220px;
+    width: 320px;
     font-size: .8em;
+    margin-top: 15px;
 }
 
 .validation-summary-errors ul{

@@ -7,12 +7,13 @@ app.controller('AddTankCtrl', ['$scope', '$location', 'Tanks', function ($scope,
         gallons: ''
     };
 
+    $scope.errors = null;
+
     $scope.add = function () {
         Tanks.addTank($scope.tank).success(function (data) {
             $location.path('/tanks');
         }).error(function (data) {
-            console.log('error');
-            console.log(data);
+            $scope.errors = data;
         });
     };
 

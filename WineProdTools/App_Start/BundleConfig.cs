@@ -29,7 +29,8 @@ namespace WineProdTools
                 "~/Scripts/app/controllers/addtank.js",
                 "~/Scripts/app/controllers/dashboard.js",
                 "~/Scripts/app/controllers/tanks.js",
-                "~/Scripts/app/directives/tankCanvas.js"));
+                "~/Scripts/app/directives/tankCanvas.js",
+                "~/Scripts/app/directives/modelStateErrorDisplay.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

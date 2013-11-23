@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WineProdTools.Data.EntityModels;
+using System.ComponentModel.DataAnnotations;
+using WineProdTools.Data.Validation;
 
 namespace WineProdTools.Data.DtoModels
 {
     public class TankDto
     {
         public Int64 Id { get; set; }
+        [Required]
         public string Name { get; set; }
-        public int Gallons { get; set; }
+        [PositiveInteger]
+        public int? Gallons { get; set; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }
 

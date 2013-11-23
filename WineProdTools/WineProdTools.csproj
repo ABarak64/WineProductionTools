@@ -267,10 +267,12 @@
     <Content Include="Scripts\app\controllers\addtank.js" />
     <Content Include="Scripts\app\controllers\dashboard.js" />
     <Content Include="Scripts\app\controllers\tanks.js" />
+    <Content Include="Scripts\app\directives\modelStateErrorDisplay.js" />
     <Content Include="Scripts\app\directives\tankCanvas.js" />
     <Content Include="Scripts\app\services\tanks.js" />
     <Content Include="Scripts\app\views\addtank.html" />
     <Content Include="Scripts\app\views\dashboard.html" />
+    <Content Include="Scripts\app\views\partials\modelStateErrorDisplay.html" />
     <Content Include="Scripts\app\views\partials\tankCanvas.html" />
     <Content Include="Scripts\app\views\tanks.html" />
     <Content Include="Scripts\jquery-1.8.2.js" />
