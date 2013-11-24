@@ -12,7 +12,7 @@ namespace WineProdTools.Data.EntityModels
         [Key]
         public Int64 Id { get; set; }
         public string Name { get; set; }
-        public int Gallons { get; set; }
+        public decimal Gallons { get; set; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }
         public Int64 AccountId { get; set; }

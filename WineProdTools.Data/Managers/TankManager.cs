@@ -28,7 +28,7 @@ namespace WineProdTools.Data.Managers
             { 
                 AccountId = accountId,
                 Name = tankDto.Name,
-                Gallons = (int)tankDto.Gallons,
+                Gallons = (decimal)tankDto.Gallons,
                 DateDeleted = null,
                 XPosition = 250,
                 YPosition = 250
@@ -52,7 +52,7 @@ namespace WineProdTools.Data.Managers
                 {
                     throw new System.Security.Authentication.AuthenticationException();
                 }
-                tank.Gallons = (int)tankDto.Gallons;
+                tank.Gallons = (decimal)tankDto.Gallons;
                 tank.Name = tankDto.Name;
                 tank.XPosition = tankDto.XPosition;
                 tank.YPosition = tankDto.YPosition;

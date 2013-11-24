@@ -56,6 +56,7 @@
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Validation\PositiveIntegerAttribute.cs" />
+    <Compile Include="Validation\PositiveNumberAttribute.cs" />
     <Compile Include="WineProdToolsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WineProdToolsDataInitializer.cs" />

@@ -14,8 +14,8 @@ namespace WineProdTools.Data.DtoModels
         public Int64 Id { get; set; }
         [Required]
         public string Name { get; set; }
-        [PositiveInteger]
-        public int? Gallons { get; set; }
+        [PositiveNumber]
+        public decimal? Gallons { get; set; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }
 
