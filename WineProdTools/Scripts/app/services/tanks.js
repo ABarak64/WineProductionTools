@@ -7,6 +7,9 @@ app.factory('Tanks', ['$http', function ($http) {
         getTanks: function () {
             return $http.get(url + 'gettanks');
         },
+        getTank: function (tankId) {
+            return $http.get(url + '?tankId=' + tankId);
+        },
         addTank: function (tank) {
             return $http.post(url + 'tank', tank);
         },

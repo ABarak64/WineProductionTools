@@ -22,6 +22,18 @@ namespace WineProdTools.Data.Managers
             }
         }
 
+        public TankDto GetTankForAccount(Int64 tankId, Int64 accountId)
+        {
+            using (var db = new WineProdToolsContext())
+            {
+                return db.Tanks
+                    .Where(t => t.AccountId == accountId && t.DateDeleted == null && t.Id == tankId)
+                    .AsEnumerable()
+                    .Select(t => new TankDto(t))
+                    .SingleOrDefault();
+            }
+        }
+
         public Int64 AddTankForAccount(TankDto tankDto, Int64 accountId)
         {
             var tank = new Tank 

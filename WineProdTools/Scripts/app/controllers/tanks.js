@@ -1,8 +1,9 @@
 ﻿'use strict';
 
-app.controller('TanksCtrl', ['$scope', 'Tanks', function ($scope, Tanks) {
+app.controller('TanksCtrl', ['$scope', '$location', 'Tanks', function ($scope, $location, Tanks) {
 
     $scope.movedTank = null;
+    $scope.selectedTank = null;
 
     Tanks.getTanks().success(function (data) {
         $scope.tanks = data;
@@ -13,5 +14,11 @@ app.controller('TanksCtrl', ['$scope', 'Tanks', function ($scope, Tanks) {
             Tanks.updateTank(updatedTank);
         }
     }, true);
+
+    $scope.$watch('selectedTank', function (selectedTank, oldVal) {
+        if (selectedTank !== null) {
+            $location.path('/tankdashboard/' + selectedTank.id);
+        }
+    });
 
 }]);

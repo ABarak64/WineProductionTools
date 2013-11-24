@@ -5,10 +5,11 @@ app.directive('tankCanvas', function () {
         restrict: 'E',
         scope: {
             tanks: '=',
-            movedTank: '='
+            movedTank: '=',
+            selectedTank: '='
         },
         templateUrl: 'Scripts/app/views/partials/tankCanvas.html',
-        controller: ['$scope', function ($scope) {
+        controller: ['$scope', '$attrs', function ($scope, $attrs) {
 
             // The controller injects all the tank data initially.
             $scope.$watch('tanks', function (newVal, oldVal) {
@@ -56,16 +57,28 @@ app.directive('tankCanvas', function () {
                     document.body.style.cursor = 'default';
                 });
 
-                layer.on('dragend', function () {
-                    var moved = $scope.tanks.filter(function (tank) {
-                        return tank.id === circle.attrs.id;
-                    })[0];
-                    moved.xPosition = circle.getAbsolutePosition().x;
-                    moved.yPosition = circle.getAbsolutePosition().y;
-                    $scope.movedTank = moved;
-                    $scope.$apply();
-                });
+                if (angular.isDefined($attrs.movedTank)) {
+                    layer.on('dragend', function () {
+                        var moved = $scope.tanks.filter(function (tank) {
+                            return tank.id === circle.attrs.id;
+                        })[0];
+                        moved.xPosition = circle.getAbsolutePosition().x;
+                        moved.yPosition = circle.getAbsolutePosition().y;
+                        $scope.movedTank = moved;
+                        $scope.$apply();
+                    });
+                }
 
+                if (angular.isDefined($attrs.selectedTank)) {
+                    layer.on('click', function () {
+                        var selected = $scope.tanks.filter(function (tank) {
+                            return tank.id === circle.attrs.id;
+                        })[0];
+                        $scope.selectedTank = selected;
+                        $scope.$apply();
+                    });
+                }
+                
                 group.add(circle);
                 group.add(text);
                 layer.add(group);

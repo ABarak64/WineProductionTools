@@ -19,6 +19,12 @@ namespace WineProdTools.Controllers
             return mgr.GetTanksForAccount(((CustomPrincipal)User).AccountId);
         }
 
+        public TankDto GetTank(Int64 tankId)
+        {
+            var mgr = new TankManager();
+            return mgr.GetTankForAccount(tankId, ((CustomPrincipal)User).AccountId);
+        }
+
         public HttpResponseMessage PostTank(TankDto tankDto)
         {
             if (!ModelState.IsValid)
