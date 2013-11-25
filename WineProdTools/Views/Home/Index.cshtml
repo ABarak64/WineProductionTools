@@ -34,10 +34,10 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: new { area = "" }, htmlAttributes: new { title = "Manage" })
+                            @Html.ActionLink(User.Identity.Name, "Manage", "Membership", routeValues: new { area = "" }, htmlAttributes: new { title = "Manage" })
                         </li> 
                         <li>
-                            @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "logoutForm" }))
+                            @using (Html.BeginForm("LogOff", "Membership", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "logoutForm" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>

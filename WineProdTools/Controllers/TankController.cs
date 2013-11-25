@@ -22,7 +22,12 @@ namespace WineProdTools.Controllers
         public TankDto GetTank(Int64 tankId)
         {
             var mgr = new TankManager();
-            return mgr.GetTankForAccount(tankId, ((CustomPrincipal)User).AccountId);
+            var tank = mgr.GetTankForAccount(tankId, ((CustomPrincipal)User).AccountId);
+            if (tank == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return tank;
         }
 
         public HttpResponseMessage PostTank(TankDto tankDto)

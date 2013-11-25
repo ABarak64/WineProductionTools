@@ -1,6 +1,6 @@
 ﻿@model WineProdTools.Data.RegisterModel
 
-@using (Html.BeginForm("JsonRegister", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { Id = "registerForm" }))
+@using (Html.BeginForm("JsonRegister", "Membership", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { Id = "registerForm" }))
 {
     @Html.AntiForgeryToken()
 

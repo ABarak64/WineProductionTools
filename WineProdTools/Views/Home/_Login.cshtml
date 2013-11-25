@@ -1,6 +1,6 @@
 ﻿@model WineProdTools.Data.LoginModel
 
-@using (Html.BeginForm("JsonLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "loginForm" }))
+@using (Html.BeginForm("JsonLogin", "Membership", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "loginForm" }))
 {
     @Html.AntiForgeryToken()
 

@@ -1,6 +1,6 @@
 ﻿@model WineProdTools.Data.ResetModel
 
-@using (Html.BeginForm("JsonReset", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { Id = "resetForm" }))
+@using (Html.BeginForm("JsonReset", "Membership", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { Id = "resetForm" }))
 {
     @Html.AntiForgeryToken()
 

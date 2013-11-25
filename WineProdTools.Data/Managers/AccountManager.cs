@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WineProdTools.Data.EntityModels;
+using WineProdTools.Data.DtoModels;
 
 namespace WineProdTools.Data.Managers
 {
@@ -23,6 +24,18 @@ namespace WineProdTools.Data.Managers
                 var user = db.UserProfiles.Single(u => u.UserName == userName);
                 user.AccountId = newAccount.Id;
                 db.SaveChanges();
+            }
+        }
+
+        public AccountDto GetAccount(Int64 accountId)
+        {
+            using (var db = new WineProdToolsContext())
+            {
+                return db.Accounts
+                    .Where(a => a.Id == accountId)
+                    .AsEnumerable()
+                    .Select(a => new AccountDto(a))
+                    .SingleOrDefault();
             }
         }
     }
