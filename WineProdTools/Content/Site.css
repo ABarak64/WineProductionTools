@@ -18,6 +18,10 @@ body {
     margin-top: 14px;
 }
 
+.manageAccount {
+    margin-left: 400px;
+}
+
 button, input[type=submit] {
     border: 1px solid #dedede;
     -moz-border-radius: 5px;
