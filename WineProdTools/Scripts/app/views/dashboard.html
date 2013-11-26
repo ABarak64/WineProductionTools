@@ -2,5 +2,14 @@
 <div class="col-md-2">
     <div class="list-group">
         <a href="#/editaccount" class="list-group-item">Edit Account</a>
+        <a href="#/addnote" class="list-group-item">Add Note</a>
     </div>
+</div>
+<div class="col-md-4 col-md-offset-4">
+    <ul class="notes">
+        <li ng-repeat="note in notes">
+            <p>{{note.comment}}</p>
+            <span>{{note.timeSinceCreated}}</span>
+        </li>
+    </ul>
 </div>

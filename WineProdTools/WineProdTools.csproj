@@ -187,6 +187,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\MembershipController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\TankController.cs" />
     <Compile Include="Filters\ValidateHttpAntiForgeryTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -203,6 +204,7 @@
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\controllers\addnote.js" />
     <Content Include="Scripts\app\controllers\addtank.js" />
     <Content Include="Scripts\app\controllers\dashboard.js" />
     <Content Include="Scripts\app\controllers\editaccount.js" />
@@ -211,7 +213,9 @@
     <Content Include="Scripts\app\directives\modelStateErrorDisplay.js" />
     <Content Include="Scripts\app\directives\tankCanvas.js" />
     <Content Include="Scripts\app\services\accounts.js" />
+    <Content Include="Scripts\app\services\notes.js" />
     <Content Include="Scripts\app\services\tanks.js" />
+    <Content Include="Scripts\app\views\addnote.html" />
     <Content Include="Scripts\app\views\addtank.html" />
     <Content Include="Scripts\app\views\dashboard.html" />
     <Content Include="Scripts\app\views\editaccount.html" />

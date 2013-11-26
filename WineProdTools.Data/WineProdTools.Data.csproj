@@ -48,9 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DtoModels\AccountDto.cs" />
+    <Compile Include="DtoModels\NoteDto.cs" />
     <Compile Include="DtoModels\TankDto.cs" />
     <Compile Include="EntityModels\Account.cs" />
+    <Compile Include="EntityModels\Note.cs" />
     <Compile Include="EntityModels\Tank.cs" />
+    <Compile Include="Managers\NoteManager.cs" />
     <Compile Include="Managers\TankManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="SimpleMembership.cs" />
