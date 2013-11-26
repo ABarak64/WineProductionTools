@@ -6,6 +6,9 @@ app.factory('Accounts', ['$http', function ($http) {
     return {
         getAccount: function () {
             return $http.get(url + 'account');
+        },
+        updateAccount: function (account) {
+            return $http.put(url + 'account', account);
         }
     };
 }]);

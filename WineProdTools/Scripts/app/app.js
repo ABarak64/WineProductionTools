@@ -20,6 +20,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'Scripts/app/views/tankdashboard.html',
             controller: 'TankDashboardCtrl'
         })
+        .when('/editaccount', {
+            templateUrl: 'Scripts/app/views/editaccount.html',
+            controller: 'EditAccountCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

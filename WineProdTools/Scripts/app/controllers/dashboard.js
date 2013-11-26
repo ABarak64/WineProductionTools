@@ -2,8 +2,11 @@
 
 app.controller('DashboardCtrl', ['$scope', '$routeParams', 'Accounts', function ($scope, $routeParams, Accounts) {
 
+    $scope.account = {
+        name: 'Loading Winery...'
+    };
+
     Accounts.getAccount().success(function (data) {
-        console.log(data);
         $scope.account = data;
     });
 

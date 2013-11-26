@@ -18,5 +18,17 @@ namespace WineProdTools.Controllers
             var mgr = new AccountManager();
             return mgr.GetAccount(((CustomPrincipal)User).AccountId);
         }
+
+        public HttpResponseMessage PutAccount(AccountDto accountDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            accountDto.Id = ((CustomPrincipal)User).AccountId;
+            var mgr = new AccountManager();
+            mgr.UpdateAccount(accountDto);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }

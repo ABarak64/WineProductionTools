@@ -38,5 +38,21 @@ namespace WineProdTools.Data.Managers
                     .SingleOrDefault();
             }
         }
+
+        public void UpdateAccount(AccountDto accountDto)
+        {
+            var account = new Account
+            {
+                Id = accountDto.Id,
+                Name = accountDto.Name
+            };
+
+            using (var db = new WineProdToolsContext())
+            {
+                db.Accounts.Attach(account);
+                db.Entry(account).Property(a => a.Name).IsModified = true;
+                db.SaveChanges();
+            }
+        }
     }
 }

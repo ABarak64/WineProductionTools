@@ -28,6 +28,7 @@ namespace WineProdTools
                 "~/Scripts/app/services/tanks.js",
                 "~/Scripts/app/services/accounts.js",
                 "~/Scripts/app/controllers/addtank.js",
+                "~/Scripts/app/controllers/editaccount.js",
                 "~/Scripts/app/controllers/dashboard.js",
                 "~/Scripts/app/controllers/tanks.js",
                 "~/Scripts/app/controllers/tankdashboard.js",
