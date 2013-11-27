@@ -13,10 +13,10 @@ namespace WineProdTools.Controllers
     [Authorize]
     public class NoteController : ApiController
     {
-        public IEnumerable<NoteDto> GetNotes()
+        public IEnumerable<NoteDto> GetSomeNotesAfterThisMany(int count)
         {
             var mgr = new NoteManager();
-            return mgr.GetRecentNotesForAccount(((CustomPrincipal)User).AccountId);
+            return mgr.GetSomeNotesAfterThisManyForAccount(count, ((CustomPrincipal)User).AccountId);
         }
 
         public HttpResponseMessage PostNote(NoteDto noteDto)

@@ -211,6 +211,7 @@
     <Content Include="Scripts\app\controllers\tankdashboard.js" />
     <Content Include="Scripts\app\controllers\tanks.js" />
     <Content Include="Scripts\app\directives\modelStateErrorDisplay.js" />
+    <Content Include="Scripts\app\directives\ng-infinite-scroll.js" />
     <Content Include="Scripts\app\directives\tankCanvas.js" />
     <Content Include="Scripts\app\services\accounts.js" />
     <Content Include="Scripts\app\services\notes.js" />

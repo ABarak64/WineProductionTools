@@ -50,13 +50,15 @@ namespace WineProdTools.Data.Managers
             },
         };
 
-        public IEnumerable<NoteDto> GetRecentNotesForAccount(Int64 accountId)
+        public IEnumerable<NoteDto> GetSomeNotesAfterThisManyForAccount(int count, Int64 accountId)
         {
             using (var db = new WineProdToolsContext())
             {
                 return db.Notes
                     .Where(t => t.AccountId == accountId)
                     .OrderByDescending(t => t.Id)
+                    .Skip(count)
+                    .Take(10)
                     .AsEnumerable()
                     .Select(t => new NoteDto(t))
                     .ToList();

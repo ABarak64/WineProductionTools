@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var app = angular.module('wineProductionToolsApp', ['ngRoute']);
+var app = angular.module('wineProductionToolsApp', ['ngRoute', 'infinite-scroll']);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider

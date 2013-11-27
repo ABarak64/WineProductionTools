@@ -224,6 +224,24 @@ footer {
 
 /*#endregion */
 
+/* Wine Tools Notes */
+.notes {
+    height: 450px;
+    overflow: auto;
+}
+
+.notes span {
+    font-style:italic;
+    margin-bottom: 10px;
+    display:block;
+    color: #777;
+    font-size: 80%;
+}
+
+.notes p {
+    margin: 0px;
+}
+
 @media only screen and (max-width: 600px) {
 
     body {

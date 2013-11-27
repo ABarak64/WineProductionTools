@@ -4,8 +4,8 @@ app.factory('Notes', ['$http', function ($http) {
     var url = 'api/note/';
 
     return {
-        getNotes: function () {
-            return $http.get(url + 'getnotes');
+        getSomeNotesAfterThisMany: function (count) {
+            return $http.get(url + 'getsomenotesafterthismany?count= ' + count);
         },
         addNote: function (note) {
             return $http.post(url + 'note', note);
