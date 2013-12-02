@@ -71,5 +71,19 @@ namespace WineProdTools.Data.Managers
                 db.SaveChanges();
             }
         }
+
+        public void DeleteTankForAccount(Int64 tankId, Int64 accountId)
+        {
+            using (var db = new WineProdToolsContext())
+            {
+                var tank = db.Tanks.Single(t => t.Id == tankId);
+                if (tank.AccountId != accountId)
+                {
+                    throw new System.Security.Authentication.AuthenticationException();
+                }
+                tank.DateDeleted = DateTime.Now;
+                db.SaveChanges();
+            }
+        }
     }
 }

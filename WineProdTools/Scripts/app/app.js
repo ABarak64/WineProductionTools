@@ -16,6 +16,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'Scripts/app/views/addtank.html',
             controller: 'AddTankCtrl'
         })
+        .when('/deletetank/:tankId', {
+            templateUrl: 'Scripts/app/views/deletetank.html',
+            controller: 'DeleteTankCtrl'
+        })
         .when('/addnote', {
             templateUrl: 'Scripts/app/views/addnote.html',
             controller: 'AddNoteCtrl'

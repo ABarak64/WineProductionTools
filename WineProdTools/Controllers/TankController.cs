@@ -46,6 +46,21 @@ namespace WineProdTools.Controllers
             return response;
         }
 
+        public HttpResponseMessage DeleteTank(Int64 tankId)
+        {
+            var mgr = new TankManager();
+            try
+            {
+                mgr.DeleteTankForAccount(tankId, ((CustomPrincipal)User).AccountId);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Security.Authentication.AuthenticationException e)
+            {
+                // Trying to modify a record that does not belong to the user
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+        }
+
         public HttpResponseMessage PutTank(TankDto tankDto)
         {
             if (!ModelState.IsValid)

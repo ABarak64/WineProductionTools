@@ -207,9 +207,11 @@
     <Content Include="Scripts\app\controllers\addnote.js" />
     <Content Include="Scripts\app\controllers\addtank.js" />
     <Content Include="Scripts\app\controllers\dashboard.js" />
+    <Content Include="Scripts\app\controllers\deletetank.js" />
     <Content Include="Scripts\app\controllers\editaccount.js" />
     <Content Include="Scripts\app\controllers\tankdashboard.js" />
     <Content Include="Scripts\app\controllers\tanks.js" />
+    <Content Include="Scripts\app\directives\btnRadio.js" />
     <Content Include="Scripts\app\directives\modelStateErrorDisplay.js" />
     <Content Include="Scripts\app\directives\ng-infinite-scroll.js" />
     <Content Include="Scripts\app\directives\tankCanvas.js" />
@@ -219,6 +221,7 @@
     <Content Include="Scripts\app\views\addnote.html" />
     <Content Include="Scripts\app\views\addtank.html" />
     <Content Include="Scripts\app\views\dashboard.html" />
+    <Content Include="Scripts\app\views\deletetank.html" />
     <Content Include="Scripts\app\views\editaccount.html" />
     <Content Include="Scripts\app\views\partials\modelStateErrorDisplay.html" />
     <Content Include="Scripts\app\views\partials\tankCanvas.html" />

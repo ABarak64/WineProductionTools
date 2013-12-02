@@ -6,16 +6,15 @@ app.directive('tankCanvas', function () {
         scope: {
             tanks: '=',
             movedTank: '=',
-            selectedTank: '='
+            selectedTank: '=',
+            toggleMoveTanks: '&'
         },
         templateUrl: 'Scripts/app/views/partials/tankCanvas.html',
         controller: ['$scope', '$attrs', function ($scope, $attrs) {
 
             // The controller injects all the tank data initially.
             $scope.$watch('tanks', function (newVal, oldVal) {
-                angular.forEach(newVal, function (tank) {
-                    $scope.drawTank(tank.id, tank.name, tank.xPosition, tank.yPosition);
-                });
+                $scope.drawTheTanks();
             });
 
             $scope.stage = new Kinetic.Stage({
@@ -24,9 +23,15 @@ app.directive('tankCanvas', function () {
                 height: window.innerHeight
             });
        
+            $scope.drawTheTanks = function () {
+                angular.forEach($scope.tanks, function (tank) {
+                    $scope.drawTank(tank.id, tank.name, tank.xPosition, tank.yPosition);
+                });
+            };
+
             $scope.drawTank = function (id, name, posx, posy) {
                 var layer = new Kinetic.Layer({
-                        draggable: true
+                        draggable: $scope.toggleMoveTanks
                 });
 
                 var group = new Kinetic.Group({
