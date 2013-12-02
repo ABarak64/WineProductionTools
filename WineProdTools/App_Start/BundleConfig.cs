@@ -35,9 +35,14 @@ namespace WineProdTools
                 "~/Scripts/app/controllers/dashboard.js",
                 "~/Scripts/app/controllers/tanks.js",
                 "~/Scripts/app/controllers/tankdashboard.js",
+                "~/Scripts/app/controllers/transfers.js",
+                "~/Scripts/app/controllers/tanktransfer.js",
+                "~/Scripts/app/controllers/emptytank.js",
+                "~/Scripts/app/controllers/filltank.js",
                 "~/Scripts/app/directives/tankCanvas.js",
                 "~/Scripts/app/directives/ng-infinite-scroll.js",
                 "~/Scripts/app/directives/btnRadio.js",
+                "~/Scripts/app/directives/alert.js",
                 "~/Scripts/app/directives/modelStateErrorDisplay.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

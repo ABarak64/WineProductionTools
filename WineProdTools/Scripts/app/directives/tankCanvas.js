@@ -7,7 +7,8 @@ app.directive('tankCanvas', function () {
             tanks: '=',
             movedTank: '=',
             selectedTank: '=',
-            toggleMoveTanks: '&'
+            toggleMoveTanks: '@',
+            showExternal: '@'
         },
         templateUrl: 'Scripts/app/views/partials/tankCanvas.html',
         controller: ['$scope', '$attrs', function ($scope, $attrs) {
@@ -27,11 +28,55 @@ app.directive('tankCanvas', function () {
                 angular.forEach($scope.tanks, function (tank) {
                     $scope.drawTank(tank.id, tank.name, tank.xPosition, tank.yPosition);
                 });
+                if ($scope.showExternal === 'true') {
+                    $scope.drawExternal();
+                };
             };
+
+            $scope.drawExternal = function () {
+                var layer = new Kinetic.Layer();
+                
+                var group = new Kinetic.Group({
+                    x: 50,
+                    y: 50
+                });
+
+                var rect = new Kinetic.Rect({
+                    width: 100,
+                    height: 50,
+                    fill: 'green',
+                    stroke: 'black',
+                    strokeWidth: 4
+                });
+
+                var text = new Kinetic.Text({
+                    text: 'External',
+                    fontSize: 18,
+                    fontFamily: 'FontAwesome',
+                    fill: '#555',
+                    width: 300
+                });
+
+                layer.on('mouseover', function () {
+                    document.body.style.cursor = 'pointer';
+                });
+                layer.on('mouseout', function () {
+                    document.body.style.cursor = 'default';
+                });
+
+                layer.on('click', function () {
+                    $scope.$emit('externalSelected');
+                });
+
+                group.add(rect);
+                group.add(text);
+                layer.add(group);
+                $scope.stage.add(layer);
+            }
 
             $scope.drawTank = function (id, name, posx, posy) {
                 var layer = new Kinetic.Layer({
-                        draggable: $scope.toggleMoveTanks
+                        draggable: ($scope.toggleMoveTanks === 'true')
                 });
 
                 var group = new Kinetic.Group({

@@ -1,0 +1,23 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <h2>Tank Transfers</h2>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">How to use this page</div>
+          <ul class="list-group">
+              <li class="list-group-item">To transfer between tanks, click the tank to transfer from, and then the tank to transfer to.</li>
+              <li class="list-group-item">To fill a tank, click 'External' and then click the tank to fill.</li>
+              <li class="list-group-item">To empty a tank, click the tank to empty and then click 'External'.</li>
+          </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div ng-repeat="alert in transferMessages">
+            <alert type="alert.type" close="endTransfer()">{{alert.msg}}</alert>
+        </div>
+    </div>
+</div>
+<tank-canvas tanks=tanks selected-tank=selectedTank toggle-move-tanks=false show-external=true></tank-canvas>

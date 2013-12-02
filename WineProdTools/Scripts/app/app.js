@@ -16,6 +16,14 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'Scripts/app/views/addtank.html',
             controller: 'AddTankCtrl'
         })
+        .when('/emptytank/:tankId', {
+            templateUrl: 'Scripts/app/views/emptytank.html',
+            controller: 'EmptyTankCtrl'
+        })
+        .when('/filltank/:tankId', {
+            templateUrl: 'Scripts/app/views/filltank.html',
+            controller: 'FillTankCtrl'
+        })
         .when('/deletetank/:tankId', {
             templateUrl: 'Scripts/app/views/deletetank.html',
             controller: 'DeleteTankCtrl'
@@ -31,6 +39,10 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/editaccount', {
             templateUrl: 'Scripts/app/views/editaccount.html',
             controller: 'EditAccountCtrl'
+        })
+        .when('/transfers', {
+            templateUrl: 'Scripts/app/views/transfers.html',
+            controller: 'TransfersCtrl'
         })
         .otherwise({
             redirectTo: '/'

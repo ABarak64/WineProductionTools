@@ -1,15 +1,17 @@
-﻿<h2>{{account.name}}</h2>
-<div class="col-md-2">
-    <div class="list-group">
-        <a href="#/editaccount" class="list-group-item">Edit Account</a>
-        <a href="#/addnote" class="list-group-item">Add Note</a>
+﻿<div class="row">
+    <h2>{{account.name}}</h2>
+    <div class="col-md-2">
+        <div class="list-group">
+            <a href="#/editaccount" class="list-group-item">Edit Account</a>
+            <a href="#/addnote" class="list-group-item">Add Note</a>
+        </div>
     </div>
-</div>
-<div class="col-md-4 col-md-offset-6 notes">
-    <div infinite-scroll="loadMoreNotes()" infinite-scroll-disabled="loading || noMoreNotes" infinite-scroll-distance="1" infinite-scroll-parent="true">
-        <div ng-repeat='note in notes'>
-            <p>{{note.comment}}</p>
-            <span>{{note.timeSinceCreated}} ago</span>
+    <div class="col-md-4 col-md-offset-6 notes">
+        <div infinite-scroll="loadMoreNotes()" infinite-scroll-disabled="loading || noMoreNotes" infinite-scroll-distance="1" infinite-scroll-parent="true">
+            <div ng-repeat='note in notes'>
+                <p>{{note.comment}}</p>
+                <span>{{note.timeSinceCreated}} ago</span>
+            </div>
         </div>
     </div>
 </div>

@@ -1,17 +1,19 @@
-﻿<div class="col-md-2">
-    <h2>Tank Setup</h2>
-    <div class="list-group">
-        <a href="#/addtank" class="list-group-item">+ Add Tank</a>
+﻿<div class="row">
+    <div class="col-md-2">
+        <h2>Tank Setup</h2>
+        <div class="list-group">
+            <a href="#/addtank" class="list-group-item">+ Add Tank</a>
+        </div>
     </div>
-</div>
-<div class="col-md-6 col-md-offset-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">How to use this page</div>
-      <ul class="list-group">
-        <li class="list-group-item">Click 'Add Tank' if you want to add a new tank here.</li>
-        <li class="list-group-item">Click and drag tanks around to change their position. Make it look like your actual winery!</li>
-        <li class="list-group-item">Click an individual tank for more options relating to it.</li>
-      </ul>
+    <div class="col-md-6 col-md-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">How to use this page</div>
+          <ul class="list-group">
+            <li class="list-group-item">Click 'Add Tank' if you want to add a new tank here.</li>
+            <li class="list-group-item">Click and drag tanks around to change their position. Make it look like your actual winery!</li>
+            <li class="list-group-item">Click an individual tank for more options relating to it.</li>
+          </ul>
+        </div>
     </div>
+    <tank-canvas tanks=tanks moved-tank=movedTank selected-tank=selectedTank toggle-move-tanks=true show-external=true></tank-canvas>
 </div>
-<tank-canvas tanks=tanks moved-tank=movedTank selected-tank=selectedTank toggle-move-tanks=true></tank-canvas>
