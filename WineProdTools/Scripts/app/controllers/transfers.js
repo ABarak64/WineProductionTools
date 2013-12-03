@@ -2,7 +2,6 @@
 
 app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scope, $location, Tanks) {
 
-    $scope.selectedTank = null;
     $scope.transfer = null;
     $scope.transferMessages = [];
 
@@ -11,7 +10,6 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
     });
 
     $scope.redirectToTransfer = function () {
-        console.log($scope.transfer);
         if ($scope.transfer.from === 'external') {
             $location.path('/filltank/' + $scope.transfer.to);
         } else if ($scope.transfer.to === 'external') {
@@ -21,20 +19,19 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
         }
     };
 
-    $scope.$watch('selectedTank', function (selectedTank, oldVal) {
-        if (selectedTank !== null) {
-            // If the user is starting a transfer.
-            if ($scope.transfer === null) {
-                $scope.transfer = {
-                    from: selectedTank.id,
-                    to: null
-                };
-                $scope.transferMessages.push({ type: 'info', msg: 'Click a target to transfer from ' + selectedTank.name + ' to...' });
-            } else { // Else the user is selecting the 'To' of the transfer.
-                $scope.transfer.to = selectedTank.id;
-                $scope.redirectToTransfer();
-            }
+    $scope.$on('tankSelected', function (event, tank) {
+        // If the user is starting a transfer.
+        if ($scope.transfer === null) {
+            $scope.transfer = {
+                from: tank.id,
+                to: null
+            };
+            $scope.transferMessages.push({ type: 'info', msg: 'Click a target to transfer from ' + tank.name + ' to...' });
+        } else { // Else the user is selecting the 'To' of the transfer.
+            $scope.transfer.to = tank.id;
+            $scope.redirectToTransfer();
         }
+        $scope.$apply();
     });
 
     $scope.$on('externalSelected', function (event) {

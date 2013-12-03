@@ -2,23 +2,17 @@
 
 app.controller('TanksCtrl', ['$scope', '$location', 'Tanks', function ($scope, $location, Tanks) {
 
-    $scope.movedTank = null;
-    $scope.selectedTank = null;
-
     Tanks.getTanks().success(function (data) {
         $scope.tanks = data;
     });
 
-    $scope.$watch('movedTank', function (updatedTank, oldVal) {
-        if (updatedTank !== null) {
-            Tanks.updateTank(updatedTank);
-        }
-    }, true);
+    $scope.$on('tankMoved', function (event, tank) {
+        Tanks.updateTank(tank);
+    });
 
-    $scope.$watch('selectedTank', function (selectedTank, oldVal) {
-        if (selectedTank !== null) {
-            $location.path('/tankdashboard/' + selectedTank.id);
-        }
+    $scope.$on('tankSelected', function (event, tank) {
+        $location.path('/tankdashboard/' + tank.id);
+        $scope.$apply();
     });
 
 }]);
