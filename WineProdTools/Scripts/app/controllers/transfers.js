@@ -15,7 +15,7 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
         } else if ($scope.transfer.to === 'external') {
             $location.path('/emptytank/' + $scope.transfer.from);
         } else {
-            // transfer
+            $location.path('/tanktransfer/from/' + $scope.transfer.from + '/to/' + $scope.transfer.to);
         }
     };
 
