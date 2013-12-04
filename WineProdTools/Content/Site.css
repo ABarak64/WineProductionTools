@@ -239,6 +239,15 @@ footer {
     font-size: 80%;
 }
 
+/* Wine Tools Forms */
+.btn-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+}
+
 .notes p {
     margin: 0px;
 }

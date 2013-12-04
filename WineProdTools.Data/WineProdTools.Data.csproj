@@ -49,16 +49,21 @@
   <ItemGroup>
     <Compile Include="DtoModels\AccountDto.cs" />
     <Compile Include="DtoModels\NoteDto.cs" />
+    <Compile Include="DtoModels\TankAndContentsDto.cs" />
+    <Compile Include="DtoModels\TankContentsDto.cs" />
     <Compile Include="DtoModels\TankDto.cs" />
+    <Compile Include="DtoModels\TankTransferDto.cs" />
     <Compile Include="EntityModels\Account.cs" />
     <Compile Include="EntityModels\Note.cs" />
     <Compile Include="EntityModels\Tank.cs" />
+    <Compile Include="EntityModels\TankContents.cs" />
     <Compile Include="Managers\NoteManager.cs" />
     <Compile Include="Managers\TankManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="SimpleMembership.cs" />
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Validation\MustNotOverflowTankAttribute.cs" />
     <Compile Include="Validation\PositiveIntegerAttribute.cs" />
     <Compile Include="Validation\PositiveNumberAttribute.cs" />
     <Compile Include="WineProdToolsContext.cs" />

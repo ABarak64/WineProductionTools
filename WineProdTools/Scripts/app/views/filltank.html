@@ -1,5 +1,26 @@
 ﻿<div class="row">
     <div class="col-md-4">
         <h2>Fill Tank</h2>
+        <label>Contents Name</label>
+        <input type="text" class="form-control" ng-model="transfer.name" placeholder="Enter a name for the contents" required/>
+        <label>Gallons To Add</label>
+        <input class="form-control" type="number" ng-model="transfer.gallons" pattern="\d+" placeholder="Number of gallons of content to add"/>
+        <div ng-show="tank[0].contents.id !== null">
+        <label>Analysis Details</label>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" ng-model="analysis" btn-radio="'keep'">Keep Current</button>
+                <button type="button" class="btn btn-primary" ng-model="analysis" btn-radio="'edit'">Edit</button>
+            </div>
+        </div>
+        <div ng-show="analysis === 'edit' || tank[0].contents.id === null">
+            <label>pH</label>
+            <input class="form-control" type="number" ng-model="transfer.ph" pattern="\d+" placeholder="pH level of contents"/>
+            <label>SO2</label>
+            <input class="form-control" type="number" ng-model="transfer.so2" pattern="\d+" placeholder="SO2 level of contents"/>
+        </div>
+        <br />
+        <button class="btn btn-lg btn-primary" ng-click="fill()">Fill</button>
+        <a href="#/transfers" class="btn btn-lg btn-primary">Cancel</a>
+        <model-state-error-display errors=errors></model-state-error-display>
     </div>
 </div>

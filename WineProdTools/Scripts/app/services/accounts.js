@@ -5,10 +5,10 @@ app.factory('Accounts', ['$http', function ($http) {
 
     return {
         getAccount: function () {
-            return $http.get(url + 'account');
+            return $http.get(url + 'getaccount');
         },
         updateAccount: function (account) {
-            return $http.put(url + 'account', account);
+            return $http.put(url + 'putaccount', account);
         }
     };
 }]);

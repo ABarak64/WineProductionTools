@@ -16,5 +16,6 @@ namespace WineProdTools.Data
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Tank> Tanks { get; set; }
         public DbSet<Note> Notes { get; set; }
+        public DbSet<TankContents> TankContents { get; set; }
     }
 }

@@ -4,21 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WineProdTools.Data.EntityModels
 {
-    public class Tank
+    public class TankContents
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Int64 Id { get; set; }
+        public Int64 LastTankId { get; set; }
         public string Name { get; set; }
         public decimal Gallons { get; set; }
-        public int XPosition { get; set; }
-        public int YPosition { get; set; }
-        public Int64 AccountId { get; set; }
-        public virtual Account Account { get; set; }
-        public Int64? TankContentsId { get; set; }
-        public virtual TankContents Contents { get; set; }
+        public double? Ph { get; set; }
+        public double? So2 { get; set; }
         public DateTime? DateDeleted { get; set; }
     }
 }

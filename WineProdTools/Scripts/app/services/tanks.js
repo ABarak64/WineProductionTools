@@ -8,16 +8,19 @@ app.factory('Tanks', ['$http', function ($http) {
             return $http.get(url + 'gettanks');
         },
         getTank: function (tankId) {
-            return $http.get(url + '?tankId=' + tankId);
+            return $http.get(url + 'gettank?tankId=' + tankId);
         },
         addTank: function (tank) {
-            return $http.post(url + 'tank', tank);
+            return $http.post(url + 'posttank', tank);
         },
         updateTank: function (tank) {
-            return $http.put(url + 'tank', tank);
+            return $http.put(url + 'puttank', tank);
         },
         deleteTank: function (tankId) {
-            return $http.delete(url + '?tankId=' + tankId);
-        }
+            return $http.delete(url + 'deletetank?tankId=' + tankId);
+        },
+        tankTransfer: function (transfer) {
+            return $http.put(url + 'puttanktransfer', transfer);
+        },
     };
 }]);
