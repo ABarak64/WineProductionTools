@@ -1,5 +1,17 @@
 ﻿<div class="row">
     <div class="col-md-4">
         <h2>Empty Tank</h2>
+        <label>Gallons To Remove</label>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" ng-model="removeAll" btn-radio="true">All</button>
+            <button type="button" class="btn btn-primary" ng-model="removeAll" btn-radio="false">Some</button>
+        </div>
+        <div ng-show="!removeAll">
+            <input class="form-control" type="number" ng-model="transfer.gallons" pattern="\d+" placeholder="Number of gallons of content to remove"/>
+        </div>
+        <br />
+        <button class="btn btn-lg btn-primary" ng-click="empty()">Empty</button>
+        <a href="#/transfers" class="btn btn-lg btn-primary">Cancel</a>
+        <model-state-error-display errors=errors></model-state-error-display>
     </div>
 </div>

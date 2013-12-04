@@ -10,7 +10,10 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
     });
 
     $scope.redirectToTransfer = function () {
-        if ($scope.transfer.from === 'external') {
+        if ($scope.transfer.from === 'external' && $scope.transfer.to === 'external') {
+            $scope.endTransfer();
+            $scope.transferMessages.push({ type: 'danger', msg: 'You can\'t transfer from external to external.' });
+        } else if ($scope.transfer.from === 'external') {
             $location.path('/filltank/' + $scope.transfer.to);
         } else if ($scope.transfer.to === 'external') {
             $location.path('/emptytank/' + $scope.transfer.from);
@@ -26,6 +29,7 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
                 from: tank.id,
                 to: null
             };
+            $scope.transferMessages.length = 0;
             $scope.transferMessages.push({ type: 'info', msg: 'Click a target to transfer from ' + tank.name + ' to...' });
         } else { // Else the user is selecting the 'To' of the transfer.
             $scope.transfer.to = tank.id;
@@ -41,6 +45,7 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
                 from: 'external',
                 to: null
             };
+            $scope.transferMessages.length = 0;
             $scope.transferMessages.push({ type: 'info', msg: 'Click a target to fill from an external source...' });
         } else { // Else the user is selecting the 'To' of the transfer.
             $scope.transfer.to = 'external';

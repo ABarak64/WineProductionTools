@@ -145,13 +145,10 @@ namespace WineProdTools.Data.Managers
                 {
                     throw new AuthenticationException();
                 }
-                if (tankToEmpty.Contents == null)
-                {
-                    throw new InvalidOperationException();
-                }
                 if (tankToEmpty.Contents.Gallons - transferDto.Gallons <= 0)
                 {
                     tankToEmpty.TankContentsId = null;
+                    tankToEmpty.Contents.DateDeleted = DateTime.Now;
                 }
                 else
                 {
