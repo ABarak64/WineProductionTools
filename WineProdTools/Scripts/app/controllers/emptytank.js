@@ -24,7 +24,7 @@ app.controller('EmptyTankCtrl', ['$scope', '$routeParams', '$location', 'Tanks',
 
     $scope.empty = function () {
         if ($scope.removeAll) {
-            $scope.transfer.gallons = $scope.tank[0].gallons;
+            $scope.transfer.gallons = $scope.tank[0].contents.gallons;
         }
         Tanks.tankTransfer($scope.transfer).success(function (data) {
             $location.path('/transfers');

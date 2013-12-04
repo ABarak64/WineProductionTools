@@ -12,14 +12,15 @@ namespace WineProdTools.Data.Managers
 {
     public class TankManager
     {
-        public IEnumerable<TankDto> GetTanksForAccount(Int64 accountId)
+        public IEnumerable<TankAndContentsDto> GetTanksForAccount(Int64 accountId)
         {
             using (var db = new WineProdToolsContext())
             {
                 return db.Tanks
+                    .Include(t => t.Contents)
                     .Where(t => t.AccountId == accountId && t.DateDeleted == null)
                     .AsEnumerable()
-                    .Select(t => new TankDto(t))
+                    .Select(t => new TankAndContentsDto(t))
                     .ToList();
             }
         }
@@ -45,6 +46,24 @@ namespace WineProdTools.Data.Managers
                     .Single(t => t.Id == tankId);
                 var emptyGallons = tank.Contents != null ? tank.Gallons - tank.Contents.Gallons : tank.Gallons;
                 return (emptyGallons - gallonsToAdd < 0);
+            }
+        }
+
+        public bool TankContainsAtLeastThisManyGallons(decimal gallonsToTransfer, Int64 tankId)
+        {
+            if (gallonsToTransfer == 0)
+            {
+                return true;
+            }
+            using (var db = new WineProdToolsContext())
+            {
+                var tank = db.Tanks.Include(t => t.Contents)
+                    .Single(t => t.Id == tankId);
+                if (tank.Contents == null)
+                {
+                    return false;
+                }
+                return (tank.Contents.Gallons - gallonsToTransfer >= 0);
             }
         }
 
@@ -88,78 +107,82 @@ namespace WineProdTools.Data.Managers
 
         public void TankContentsTransferForAccount(TankTransferDto transferDto, Int64 accountId)
         {
+            // Can't transfer from non-tank to non-tank.
             if (transferDto.FromId == 0 && transferDto.ToId == 0)
             {
-                throw new InvalidOperationException();
+                return;
             }
-            else if (transferDto.FromId == 0)
+            var tankIds = new List<Int64>();
+                if (transferDto.FromId != 0)
+                    tankIds.Add(transferDto.FromId);
+                if (transferDto.ToId != 0)
+                    tankIds.Add(transferDto.ToId);
+
+            using (var db = new WineProdToolsContext())
             {
-                FillTankForAccount(transferDto, accountId);
+                 var relevantTanks = db.Tanks.Include(t => t.Contents)
+                    .Where(t => tankIds.Contains(t.Id)).ToList();
+                foreach (var tank in relevantTanks)
+                {
+                    if (tank.AccountId != accountId)
+                    {
+                        throw new AuthenticationException();
+                    }
+                }
+                if (transferDto.FromId != 0)
+                {
+                    EmptyTank(relevantTanks.Single(t => t.Id == transferDto.FromId), transferDto);
+                }
+                if (transferDto.ToId != 0)
+                {
+                    FillTank(relevantTanks.Single(t => t.Id == transferDto.ToId), transferDto);
+                }
+                db.SaveChanges();
             }
-            else if (transferDto.ToId == 0)
+        }
+
+        private void FillTank(Tank tankToFill, TankTransferDto transferDto)
+        {
+            if (tankToFill.Contents == null)
             {
-                EmptyTankForAccount(transferDto, accountId);
+                tankToFill.Contents = new TankContents 
+                {
+                    LastTankId = tankToFill.Id,
+                    Gallons = 0,
+                    DateDeleted = null
+                };
+            }             
+            tankToFill.Contents.Name = transferDto.Name;
+            tankToFill.Contents.Gallons += (decimal)transferDto.Gallons;
+            tankToFill.Contents.Ph = transferDto.Ph;
+            tankToFill.Contents.So2 = transferDto.So2;
+        }
+
+        private void EmptyTank(Tank tankToEmpty, TankTransferDto transferDto)
+        {
+            if (tankToEmpty.Contents == null)
+            {
+                return;
+            }
+            if (tankToEmpty.Contents.Gallons - transferDto.Gallons <= 0)
+            {
+                tankToEmpty.TankContentsId = null;
+                tankToEmpty.Contents.DateDeleted = DateTime.Now;
             }
             else
             {
-                TransferBetweenTanksForAccount(transferDto, accountId);
+                tankToEmpty.Contents.Gallons -= (decimal)transferDto.Gallons;
             }
         }
 
-        private void FillTankForAccount(TankTransferDto transferDto, Int64 accountId)
+        private void TransferBetweenTanksForAccount(TankTransferDto transferDto, Int64 accountId)
         {
             using (var db = new WineProdToolsContext())
             {
-                var tankToFill = db.Tanks.Include(t => t.Contents)
-                    .Single(t => t.Id == transferDto.ToId);
-                    
-                if (tankToFill.AccountId != accountId)
-                {
-                    throw new AuthenticationException();
-                }
-                if (tankToFill.Contents == null)
-                {
-                    tankToFill.Contents = new TankContents 
-                    {
-                        LastTankId = tankToFill.Id,
-                        Gallons = 0,
-                        DateDeleted = null
-                    };
-                }             
-                tankToFill.Contents.Name = transferDto.Name;
-                tankToFill.Contents.Gallons += (decimal)transferDto.Gallons;
-                tankToFill.Contents.Ph = transferDto.Ph;
-                tankToFill.Contents.So2 = transferDto.So2;
-                db.SaveChanges();
+                var relevantTanks = db.Tanks
+                    .Where(t => new List<Int64> { transferDto.ToId, transferDto.FromId }.Contains(t.Id));
+
             }
-        }
-
-        private void EmptyTankForAccount(TankTransferDto transferDto, Int64 accountId)
-        {
-            using (var db = new WineProdToolsContext())
-            {
-                var tankToEmpty = db.Tanks.Include(t => t.Contents)
-                    .Single(t => t.Id == transferDto.FromId);
-
-                if (tankToEmpty.AccountId != accountId)
-                {
-                    throw new AuthenticationException();
-                }
-                if (tankToEmpty.Contents.Gallons - transferDto.Gallons <= 0)
-                {
-                    tankToEmpty.TankContentsId = null;
-                    tankToEmpty.Contents.DateDeleted = DateTime.Now;
-                }
-                else
-                {
-                    tankToEmpty.Contents.Gallons -= (decimal)transferDto.Gallons;
-                }
-                db.SaveChanges();
-            }
-        }
-
-        private void TransferBetweenTanksForAccount(TankTransferDto tankDto, Int64 accountId)
-        {
         }
 
         public void DeleteTankForAccount(Int64 tankId, Int64 accountId)

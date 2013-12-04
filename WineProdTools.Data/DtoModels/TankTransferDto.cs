@@ -16,6 +16,7 @@ namespace WineProdTools.Data.DtoModels
         public string Name { get; set; }
         [PositiveNumber]
         [MustNotOverflowTank]
+        [FromTankMustContainAtLeastThisMuch]
         public decimal? Gallons { get; set; }
         [PositiveNumber]
         [Range(0, 14)]

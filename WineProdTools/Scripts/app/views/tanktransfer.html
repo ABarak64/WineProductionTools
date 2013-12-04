@@ -1,5 +1,31 @@
 ﻿<div class="row">
     <div class="col-md-4">
         <h2>Tank Transfer</h2>
+        <label>Contents Name</label>
+        <input type="text" class="form-control" ng-model="transfer.name" placeholder="Enter a name for the contents" required/>
+        <label>Gallons To Transfer</label>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" ng-model="transferAll" btn-radio="true">All</button>
+            <button type="button" class="btn btn-primary" ng-model="transferAll" btn-radio="false">Some</button>
+        </div>
+        <div ng-show="!transferAll">
+            <input class="form-control" type="number" ng-model="transfer.gallons" pattern="\d+" placeholder="Number of gallons of content to transfer"/>
+        </div>
+        <label>Analysis Details</label>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" ng-model="analysis" btn-radio="'from'">Use From Tank</button>
+            <button type="button" ng-show="tanks[1].contents.gallons !== null" class="btn btn-primary" ng-model="analysis" btn-radio="'to'">Use To Tank</button>
+            <button type="button" class="btn btn-primary" ng-model="analysis" btn-radio="'edit'">Edit</button>
+        </div>
+        <div ng-show="analysis === 'edit'">
+            <label>pH</label>
+            <input class="form-control" type="number" ng-model="transfer.ph" pattern="\d+" placeholder="pH level of To Tank contents"/>
+            <label>SO2</label>
+            <input class="form-control" type="number" ng-model="transfer.so2" pattern="\d+" placeholder="SO2 level of To Tank contents"/>
+        </div>
+        <br />
+        <button class="btn btn-lg btn-primary" ng-click="transferTank()">Transfer</button>
+        <a href="#/transfers" class="btn btn-lg btn-primary">Cancel</a>
+        <model-state-error-display errors=errors></model-state-error-display>
     </div>
 </div>

@@ -13,7 +13,7 @@ namespace WineProdTools.Controllers
     [Authorize]
     public class TankController : ApiController
     {
-        public IEnumerable<TankDto> GetTanks()
+        public IEnumerable<TankAndContentsDto> GetTanks()
         {
             var mgr = new TankManager();
             return mgr.GetTanksForAccount(((CustomPrincipal)User).AccountId);

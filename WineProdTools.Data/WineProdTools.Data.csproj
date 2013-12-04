@@ -63,6 +63,7 @@
     <Compile Include="SimpleMembership.cs" />
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Validation\FromTankMustContainAtLeastThisMuchAttribute.cs" />
     <Compile Include="Validation\MustNotOverflowTankAttribute.cs" />
     <Compile Include="Validation\PositiveIntegerAttribute.cs" />
     <Compile Include="Validation\PositiveNumberAttribute.cs" />
