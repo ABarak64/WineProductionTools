@@ -16,6 +16,9 @@ app.factory('Tanks', ['$http', function ($http) {
         updateTank: function (tank) {
             return $http.put(url + 'puttank', tank);
         },
+        updateTankContents: function (contents) {
+            return $http.put(url + 'puttankcontents', contents);
+        },
         deleteTank: function (tankId) {
             return $http.delete(url + 'deletetank?tankId=' + tankId);
         },

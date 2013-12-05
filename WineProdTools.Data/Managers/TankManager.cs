@@ -105,6 +105,27 @@ namespace WineProdTools.Data.Managers
             }
         }
 
+        public void UpdateTankContentsForAccounts(TankContentsDto contentsDto, Int64 accountId)
+        {
+            using (var db = new WineProdToolsContext())
+            {
+                var tank = db.Tanks.Include(t => t.Contents)
+                    .Single(t => t.Id == contentsDto.TankId);
+                if (tank.AccountId != accountId)
+                {
+                    throw new AuthenticationException();
+                }
+                if (tank.Contents == null)
+                {
+                    throw new InvalidOperationException();
+                }
+                tank.Contents.Name = contentsDto.Name;
+                tank.Contents.Ph = contentsDto.Ph;
+                tank.Contents.So2 = contentsDto.So2;
+                db.SaveChanges();
+            }
+        }
+
         public void TankContentsTransferForAccount(TankTransferDto transferDto, Int64 accountId)
         {
             // Can't transfer from non-tank to non-tank.

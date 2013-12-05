@@ -7,6 +7,7 @@ using System.Web.Http;
 using WineProdTools.Data.Managers;
 using WineProdTools.Data.DtoModels;
 using WineProdTools.Membership;
+using System.Security.Authentication;
 
 namespace WineProdTools.Controllers
 {
@@ -54,7 +55,7 @@ namespace WineProdTools.Controllers
                 mgr.DeleteTankForAccount(tankId, ((CustomPrincipal)User).AccountId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
-            catch (System.Security.Authentication.AuthenticationException e)
+            catch (AuthenticationException e)
             {
                 // Trying to modify a record that does not belong to the user
                 return Request.CreateResponse(HttpStatusCode.Unauthorized);
@@ -73,12 +74,32 @@ namespace WineProdTools.Controllers
                 mgr.UpdateTankForAccount(tankDto, ((CustomPrincipal)User).AccountId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
-            catch (System.Security.Authentication.AuthenticationException e)
+            catch (AuthenticationException e)
             {
                 // Trying to modify a record that does not belong to the user
                 return Request.CreateResponse(HttpStatusCode.Unauthorized);
             }
         }
+
+        public HttpResponseMessage PutTankContents(TankContentsDto contentsDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            var mgr = new TankManager();
+            try
+            {
+                mgr.UpdateTankContentsForAccounts(contentsDto, ((CustomPrincipal)User).AccountId);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (AuthenticationException e)
+            {
+                // Trying to modify a record that does not belong to the user
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+        }
+
 
         public HttpResponseMessage PutTankTransfer(TankTransferDto transferDto)
         {
@@ -92,7 +113,7 @@ namespace WineProdTools.Controllers
                 mgr.TankContentsTransferForAccount(transferDto, ((CustomPrincipal)User).AccountId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
-            catch (System.Security.Authentication.AuthenticationException e)
+            catch (AuthenticationException e)
             {
                 // Trying to modify a record that does not belong to the user
                 return Request.CreateResponse(HttpStatusCode.Unauthorized);

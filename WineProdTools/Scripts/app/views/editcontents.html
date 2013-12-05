@@ -1,0 +1,15 @@
+﻿<div class="row">
+    <div class="col-md-4">
+        <h2>Edit Tank Contents</h2>
+        <label>Contents Name</label>
+        <input type="text" class="form-control" ng-model="contents.name" placeholder="Enter a name for the contents" required/>
+        <label>pH</label>
+        <input class="form-control" type="number" ng-model="contents.ph" pattern="\d+" placeholder="pH level of contents"/>
+        <label>SO2</label>
+        <input class="form-control" type="number" ng-model="contents.so2" pattern="\d+" placeholder="SO2 level of contents"/>
+        <br />
+        <button class="btn btn-lg btn-primary" ng-click="save()">Save</button>
+        <a href="#/tankdashboard/{{tankId}}" class="btn btn-lg btn-primary">Cancel</a>
+        <model-state-error-display errors=errors></model-state-error-display>
+    </div>
+</div>

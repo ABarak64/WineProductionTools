@@ -3,6 +3,7 @@
     <div class="col-md-2">
         <div class="list-group">
           <a href="#/deletetank/{{tank[0].id}}" class="list-group-item">Delete Tank</a>
+          <a ng-show="tank[0].contents.id !== null" href="#/editcontents/{{tank[0].id}}" class="list-group-item">Edit Tank Contents</a>
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1">

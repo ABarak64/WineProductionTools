@@ -209,6 +209,7 @@
     <Content Include="Scripts\app\controllers\dashboard.js" />
     <Content Include="Scripts\app\controllers\deletetank.js" />
     <Content Include="Scripts\app\controllers\editaccount.js" />
+    <Content Include="Scripts\app\controllers\editcontents.js" />
     <Content Include="Scripts\app\controllers\emptytank.js" />
     <Content Include="Scripts\app\controllers\filltank.js" />
     <Content Include="Scripts\app\controllers\tankdashboard.js" />
@@ -228,6 +229,7 @@
     <Content Include="Scripts\app\views\dashboard.html" />
     <Content Include="Scripts\app\views\deletetank.html" />
     <Content Include="Scripts\app\views\editaccount.html" />
+    <Content Include="Scripts\app\views\editcontents.html" />
     <Content Include="Scripts\app\views\emptytank.html" />
     <Content Include="Scripts\app\views\filltank.html" />
     <Content Include="Scripts\app\views\partials\alert.html" />
