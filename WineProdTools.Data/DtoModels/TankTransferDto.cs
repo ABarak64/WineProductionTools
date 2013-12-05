@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using WineProdTools.Data.Validation;
+using WineProdTools.Data.EntityModels;
 
 namespace WineProdTools.Data.DtoModels
 {
@@ -23,5 +24,17 @@ namespace WineProdTools.Data.DtoModels
         public double? Ph { get; set; }
         [PositiveNumber]
         public double? So2 { get; set; }
+        [PositiveNumber]
+        [Range(0, 100)]
+        public double? Alcohol { get; set; }
+        [PositiveNumber]
+        public double? TA { get; set; }
+        [PositiveNumber]
+        public double? VA { get; set; }
+        [PositiveInteger]
+        public double? MA { get; set; }
+        [PositiveInteger]
+        public double? RS { get; set; }
+        public TankContentState? State { get; set; }
     }
 }

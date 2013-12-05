@@ -90,7 +90,7 @@ namespace WineProdTools.Controllers
             var mgr = new TankManager();
             try
             {
-                mgr.UpdateTankContentsForAccounts(contentsDto, ((CustomPrincipal)User).AccountId);
+                mgr.UpdateTankContentsForAccount(contentsDto, ((CustomPrincipal)User).AccountId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (AuthenticationException e)

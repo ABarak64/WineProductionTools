@@ -27,7 +27,7 @@ namespace WineProdTools.Data.DtoModels
             this.YPosition = tank.YPosition;
             if (tank.Contents != null)
             {
-                this.Contents = new TankContentsDto(tank.Contents);
+                this.Contents = new TankContentsDto(tank.Contents, this.Id);
             }
             else
             {

@@ -11,7 +11,7 @@
         <div ng-show="!transferAll">
             <input class="form-control" type="number" ng-model="transfer.gallons" pattern="\d+" placeholder="Number of gallons of content to transfer"/>
         </div>
-        <label>Analysis Details</label>
+        <label>Analysis Details of To Tank</label>
         <div class="btn-group">
             <button type="button" class="btn btn-primary" ng-model="analysis" btn-radio="'from'">Use From Tank</button>
             <button type="button" ng-show="tanks[1].contents.gallons !== null" class="btn btn-primary" ng-model="analysis" btn-radio="'to'">Use To Tank</button>
@@ -22,6 +22,16 @@
             <input class="form-control" type="number" ng-model="transfer.ph" pattern="\d+" placeholder="pH level of To Tank contents"/>
             <label>SO2</label>
             <input class="form-control" type="number" ng-model="transfer.so2" pattern="\d+" placeholder="SO2 level of To Tank contents"/>
+            <label>% Alcohol</label>
+            <input class="form-control" type="number" ng-model="transfer.alcohol" pattern="\d+" placeholder="% Alcohol of contents"/>
+            <label>TA</label>
+            <input class="form-control" type="number" ng-model="transfer.ta" pattern="\d+" placeholder="Titratable acidity of contents"/>
+            <label>VA</label>
+            <input class="form-control" type="number" ng-model="transfer.va" pattern="\d+" placeholder="Volatile acidity of contents"/>
+            <label>MA</label>
+            <input class="form-control" type="number" ng-model="transfer.ma" pattern="\d+" placeholder="Malic acid of contents"/>
+            <label>RS</label>
+            <input class="form-control" type="number" ng-model="transfer.rs" pattern="\d+" placeholder="Reducing sugar of contents"/>
         </div>
         <br />
         <button class="btn btn-lg btn-primary" ng-click="transferTank()">Transfer</button>

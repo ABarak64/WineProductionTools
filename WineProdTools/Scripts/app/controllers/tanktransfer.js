@@ -6,21 +6,12 @@ app.controller('TankTransferCtrl', ['$scope', '$routeParams', '$location', 'Tank
     $scope.analysis = 'from';
     $scope.tanks = [];
     $scope.transferAll = true;
-    $scope.transfer = {
-        fromId: $routeParams.fromTankId,
-        toId: $routeParams.toTankId,
-        gallons: null,
-        name: null,
-        ph: null,
-        so2: null
-    };
 
     Tanks.getTank($routeParams.fromTankId).success(function (data) {
         data.xPosition = 100;   // Don't care where the tank is supposed to be, this is only for static display purposes.
         data.yPosition = 100;
-        $scope.transfer.name = data.contents.name;
-        $scope.transfer.ph = data.contents.ph;
-        $scope.transfer.so2 = data.contents.so2;
+        $scope.transfer = data.contents;
+        $scope.transfer.gallons = null;
         $scope.tanks.push(data);
     }).then(function () {
         Tanks.getTank($routeParams.toTankId).success(function (data) {
@@ -31,6 +22,8 @@ app.controller('TankTransferCtrl', ['$scope', '$routeParams', '$location', 'Tank
     });
 
     $scope.transferTank = function () {
+        $scope.transfer.fromId = $routeParams.fromTankId;
+        $scope.transfer.toId = $routeParams.toTankId;
         if ($scope.analysis === 'to') {
             $scope.transfer.ph = $scope.tanks[1].contents.ph;
             $scope.transfer.so2 = $scope.tanks[1].contents.so2;

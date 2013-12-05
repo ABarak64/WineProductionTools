@@ -15,9 +15,9 @@ namespace WineProdTools.Data.Validation
             var errorMsg = "The " + validationContext.DisplayName + " field must be a positive integer.";
             if (value == null)
                 return new ValidationResult(errorMsg);
-            if (!(value is int))
+            if (!((double)value % 1 == 0))
                 return new ValidationResult(errorMsg);
-            if ((int)value <= 0)
+            if ((double)value <= 0)
                 return new ValidationResult(errorMsg);
             return ValidationResult.Success;
         }

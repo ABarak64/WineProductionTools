@@ -12,6 +12,20 @@ namespace WineProdTools.Data.Managers
 {
     public class TankManager
     {
+        private readonly Dictionary<TankContentState, string> _tankStateToStateNameMap = new Dictionary<TankContentState, string>()
+        {
+            { TankContentState.None, "None" },
+            { TankContentState.PrimaryFermentation, "Primary Fermentation" },
+            { TankContentState.MalolacticFermentation, "Malolactic Fermentation" },
+            { TankContentState.CompleteSulfured, "Complete and Sulfured" },
+            { TankContentState.Finished, "Finished" }
+        };
+
+        public string GetContentStateName(TankContentState state)
+        {
+            return _tankStateToStateNameMap[state];
+        }
+
         public IEnumerable<TankAndContentsDto> GetTanksForAccount(Int64 accountId)
         {
             using (var db = new WineProdToolsContext())
@@ -105,7 +119,7 @@ namespace WineProdTools.Data.Managers
             }
         }
 
-        public void UpdateTankContentsForAccounts(TankContentsDto contentsDto, Int64 accountId)
+        public void UpdateTankContentsForAccount(TankContentsDto contentsDto, Int64 accountId)
         {
             using (var db = new WineProdToolsContext())
             {
@@ -122,6 +136,12 @@ namespace WineProdTools.Data.Managers
                 tank.Contents.Name = contentsDto.Name;
                 tank.Contents.Ph = contentsDto.Ph;
                 tank.Contents.So2 = contentsDto.So2;
+                tank.Contents.Alcohol = contentsDto.Alcohol;
+                tank.Contents.TA = contentsDto.TA;
+                tank.Contents.VA = contentsDto.VA;
+                tank.Contents.MA = (int?)contentsDto.MA;
+                tank.Contents.RS = (int?)contentsDto.RS;
+                tank.Contents.State = contentsDto.State;
                 db.SaveChanges();
             }
         }
@@ -177,6 +197,12 @@ namespace WineProdTools.Data.Managers
             tankToFill.Contents.Gallons += (decimal)transferDto.Gallons;
             tankToFill.Contents.Ph = transferDto.Ph;
             tankToFill.Contents.So2 = transferDto.So2;
+            tankToFill.Contents.Alcohol = transferDto.Alcohol;
+            tankToFill.Contents.TA = transferDto.TA;
+            tankToFill.Contents.VA = transferDto.VA;
+            tankToFill.Contents.MA = (int?)transferDto.MA;
+            tankToFill.Contents.RS = (int?)transferDto.RS;
+            tankToFill.Contents.State = transferDto.State;
         }
 
         private void EmptyTank(Tank tankToEmpty, TankTransferDto transferDto)
