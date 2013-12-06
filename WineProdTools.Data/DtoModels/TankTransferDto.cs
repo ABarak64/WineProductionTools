@@ -35,6 +35,6 @@ namespace WineProdTools.Data.DtoModels
         public double? MA { get; set; }
         [PositiveInteger]
         public double? RS { get; set; }
-        public TankContentState? State { get; set; }
+        public TankContentsState State { get; set; }
     }
 }

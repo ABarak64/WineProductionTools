@@ -7,6 +7,9 @@ app.factory('Tanks', ['$http', function ($http) {
         getTanks: function () {
             return $http.get(url + 'gettanks');
         },
+        getContentStates: function () {
+            return $http.get(url + 'Gettankstates');
+        },
         getTank: function (tankId) {
             return $http.get(url + 'gettank?tankId=' + tankId);
         },

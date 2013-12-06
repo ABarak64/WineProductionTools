@@ -12,30 +12,24 @@ namespace WineProdTools.Data.Managers
 {
     public class TankManager
     {
-        private readonly Dictionary<TankContentState, string> _tankStateToStateNameMap = new Dictionary<TankContentState, string>()
-        {
-            { TankContentState.None, "None" },
-            { TankContentState.PrimaryFermentation, "Primary Fermentation" },
-            { TankContentState.MalolacticFermentation, "Malolactic Fermentation" },
-            { TankContentState.CompleteSulfured, "Complete and Sulfured" },
-            { TankContentState.Finished, "Finished" }
-        };
-
-        public string GetContentStateName(TankContentState state)
-        {
-            return _tankStateToStateNameMap[state];
-        }
-
         public IEnumerable<TankAndContentsDto> GetTanksForAccount(Int64 accountId)
         {
             using (var db = new WineProdToolsContext())
             {
                 return db.Tanks
-                    .Include(t => t.Contents)
+                    .Include(t => t.Contents.State)
                     .Where(t => t.AccountId == accountId && t.DateDeleted == null)
                     .AsEnumerable()
                     .Select(t => new TankAndContentsDto(t))
                     .ToList();
+            }
+        }
+
+        public IEnumerable<TankContentsState> GetContentStates()
+        {
+            using (var db = new WineProdToolsContext())
+            {
+                return db.TankContentsStates.ToList();
             }
         }
 
@@ -44,7 +38,7 @@ namespace WineProdTools.Data.Managers
             using (var db = new WineProdToolsContext())
             {
                 return db.Tanks
-                    .Include(t => t.Contents)
+                    .Include(t => t.Contents.State)
                     .Where(t => t.AccountId == accountId && t.DateDeleted == null && t.Id == tankId)
                     .AsEnumerable()
                     .Select(t => new TankAndContentsDto(t))
@@ -141,7 +135,7 @@ namespace WineProdTools.Data.Managers
                 tank.Contents.VA = contentsDto.VA;
                 tank.Contents.MA = (int?)contentsDto.MA;
                 tank.Contents.RS = (int?)contentsDto.RS;
-                tank.Contents.State = contentsDto.State;
+                tank.Contents.TankContentsStateId = contentsDto.State.Id;
                 db.SaveChanges();
             }
         }
@@ -202,7 +196,7 @@ namespace WineProdTools.Data.Managers
             tankToFill.Contents.VA = transferDto.VA;
             tankToFill.Contents.MA = (int?)transferDto.MA;
             tankToFill.Contents.RS = (int?)transferDto.RS;
-            tankToFill.Contents.State = transferDto.State;
+            tankToFill.Contents.TankContentsStateId = transferDto.State.Id;
         }
 
         private void EmptyTank(Tank tankToEmpty, TankTransferDto transferDto)
@@ -219,16 +213,6 @@ namespace WineProdTools.Data.Managers
             else
             {
                 tankToEmpty.Contents.Gallons -= (decimal)transferDto.Gallons;
-            }
-        }
-
-        private void TransferBetweenTanksForAccount(TankTransferDto transferDto, Int64 accountId)
-        {
-            using (var db = new WineProdToolsContext())
-            {
-                var relevantTanks = db.Tanks
-                    .Where(t => new List<Int64> { transferDto.ToId, transferDto.FromId }.Contains(t.Id));
-
             }
         }
 

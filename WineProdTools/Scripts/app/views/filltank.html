@@ -13,6 +13,8 @@
             </div>
         </div>
         <div ng-show="analysis === 'edit' || tank[0].contents.id === null">
+            <label>State</label>
+            <select class="form-control" ng-model="transfer.state" ng-options="s.name for s in states"></select>
             <label>pH</label>
             <input class="form-control" type="number" ng-model="transfer.ph" pattern="\d+" placeholder="pH level of contents"/>
             <label>SO2</label>

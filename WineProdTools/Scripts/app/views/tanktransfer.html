@@ -18,6 +18,8 @@
             <button type="button" class="btn btn-primary" ng-model="analysis" btn-radio="'edit'">Edit</button>
         </div>
         <div ng-show="analysis === 'edit'">
+            <label>State</label>
+            <select class="form-control" ng-model="transfer.state" ng-options="s.name for s in states"></select>
             <label>pH</label>
             <input class="form-control" type="number" ng-model="transfer.ph" pattern="\d+" placeholder="pH level of To Tank contents"/>
             <label>SO2</label>

@@ -3,10 +3,22 @@
         <h2>Edit Tank Contents</h2>
         <label>Contents Name</label>
         <input type="text" class="form-control" ng-model="contents.name" placeholder="Enter a name for the contents" required/>
+        <label>State</label>
+        <select class="form-control" ng-model="contents.state" ng-options="s.name for s in states"></select>
         <label>pH</label>
         <input class="form-control" type="number" ng-model="contents.ph" pattern="\d+" placeholder="pH level of contents"/>
         <label>SO2</label>
         <input class="form-control" type="number" ng-model="contents.so2" pattern="\d+" placeholder="SO2 level of contents"/>
+        <label>% Alcohol</label>
+        <input class="form-control" type="number" ng-model="contents.alcohol" pattern="\d+" placeholder="% Alcohol of contents"/>
+        <label>TA</label>
+        <input class="form-control" type="number" ng-model="contents.ta" pattern="\d+" placeholder="Titratable acidity of contents"/>
+        <label>VA</label>
+        <input class="form-control" type="number" ng-model="contents.va" pattern="\d+" placeholder="Volatile acidity of contents"/>
+        <label>MA</label>
+        <input class="form-control" type="number" ng-model="contents.ma" pattern="\d+" placeholder="Malic acid of contents"/>
+        <label>RS</label>
+        <input class="form-control" type="number" ng-model="contents.rs" pattern="\d+" placeholder="Reducing sugar of contents"/>
         <br />
         <button class="btn btn-lg btn-primary" ng-click="save()">Save</button>
         <a href="#/tankdashboard/{{tankId}}" class="btn btn-lg btn-primary">Cancel</a>

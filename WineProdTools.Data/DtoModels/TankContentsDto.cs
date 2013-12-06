@@ -33,10 +33,13 @@ namespace WineProdTools.Data.DtoModels
         public double? MA { get; set; }
         [PositiveInteger]
         public double? RS { get; set; }
-        public TankContentState? State { get; set; }
-        public string StateName { get; set; }
+        public TankContentsState State { get; set; }
 
-        public TankContentsDto() { }
+        public TankContentsDto() 
+        {
+            this.State = new TankContentsState { Id = 1, Name = "None" };
+        }
+        
         public TankContentsDto(TankContents contents, Int64 tankId)
         {
             this.TankId = TankId;
@@ -50,8 +53,7 @@ namespace WineProdTools.Data.DtoModels
             this.VA = contents.VA;
             this.MA = contents.MA;
             this.RS = contents.RS;
-            this.State = contents.State;
-            this.StateName = this.State == null ? null : new TankManager().GetContentStateName(this.State.Value);
+            this.State = contents.State ?? new TankContentsState { Id = 1, Name = "None" };
         }
     }
 }

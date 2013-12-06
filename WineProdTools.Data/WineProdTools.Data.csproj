@@ -57,6 +57,7 @@
     <Compile Include="EntityModels\Note.cs" />
     <Compile Include="EntityModels\Tank.cs" />
     <Compile Include="EntityModels\TankContents.cs" />
+    <Compile Include="EntityModels\TankContentsState.cs" />
     <Compile Include="Managers\NoteManager.cs" />
     <Compile Include="Managers\TankManager.cs" />
     <Compile Include="Managers\UserManager.cs" />

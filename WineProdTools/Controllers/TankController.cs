@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using WineProdTools.Data.Managers;
 using WineProdTools.Data.DtoModels;
+using WineProdTools.Data.EntityModels;
 using WineProdTools.Membership;
 using System.Security.Authentication;
 
@@ -18,6 +19,11 @@ namespace WineProdTools.Controllers
         {
             var mgr = new TankManager();
             return mgr.GetTanksForAccount(((CustomPrincipal)User).AccountId);
+        }
+
+        public IEnumerable<TankContentsState> GetTankStates()
+        {
+            return new TankManager().GetContentStates();
         }
 
         public TankAndContentsDto GetTank(Int64 tankId)

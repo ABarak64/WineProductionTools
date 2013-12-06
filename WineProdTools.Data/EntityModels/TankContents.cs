@@ -23,16 +23,8 @@ namespace WineProdTools.Data.EntityModels
         public double? VA { get; set; }
         public int? MA { get; set; }
         public int? RS { get; set; }
-        public TankContentState? State { get; set; }
+        public Int64 TankContentsStateId { get; set; }
+        public virtual TankContentsState State { get; set; }
         public DateTime? DateDeleted { get; set; }
-    }
-
-    public enum TankContentState
-    {
-        None = 0,
-        PrimaryFermentation,
-        MalolacticFermentation,
-        CompleteSulfured,
-        Finished
-    }
+    } 
 }
