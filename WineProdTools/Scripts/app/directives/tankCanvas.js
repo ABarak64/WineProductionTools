@@ -24,7 +24,7 @@ app.directive('tankCanvas', function () {
        
             $scope.drawTheTanks = function () {
                 angular.forEach($scope.tanks, function (tank) {
-                    $scope.drawTank(tank.id, tank.name, tank.xPosition, tank.yPosition);
+                    $scope.drawTank(tank);
                 });
                 if ($scope.showExternal === 'true') {
                     $scope.drawExternal();
@@ -40,10 +40,9 @@ app.directive('tankCanvas', function () {
                 });
 
                 var rect = new Kinetic.Rect({
-                    width: 100,
+                    width: 80,
                     height: 50,
-                    fill: 'green',
-                    stroke: 'black',
+                    stroke: '#CCC',
                     strokeWidth: 4
                 });
 
@@ -52,7 +51,9 @@ app.directive('tankCanvas', function () {
                     fontSize: 18,
                     fontFamily: 'FontAwesome',
                     fill: '#555',
-                    width: 300
+                    width: 300,
+                    x: 10,
+                    y: 18
                 });
 
                 layer.on('mouseover', function () {
@@ -72,37 +73,68 @@ app.directive('tankCanvas', function () {
                 $scope.stage.add(layer);
             }
 
-            $scope.drawTank = function (id, name, posx, posy) {
+            $scope.drawTank = function (tank) {
                 var layer = new Kinetic.Layer({
                         draggable: ($scope.toggleMoveTanks === 'true')
                 });
 
                 var group = new Kinetic.Group({
-                    x: posx,
-                    y: posy
+                    x: tank.xPosition,
+                    y: tank.yPosition
                 });
 
                 var circle = new Kinetic.Circle({
-                    radius: 40,
-                    fill: 'red',
-                    stroke: 'black',
+                    radius: $scope.getTankRadius(tank),
+                    stroke: $scope.contentStateToColorMap[tank.contents.state.id],
                     strokeWidth: 4,
-                    id: id
+                    id: tank.id
                 });
 
-                var text = new Kinetic.Text({
-                    text: name,
+                var contents = new Kinetic.Circle({
+                    radius: $scope.getContentsRadius(tank),
+                    fill: $scope.contentStateToColorMap[tank.contents.state.id]
+                });
+
+                var analysisText = 'Name:     ' + tank.contents.name + '\n'
+                    + 'Gallons:  ' + tank.contents.gallons + '\n'
+                    + 'pH:       ' + tank.contents.ph + '\n'
+                    + 'SO2:      ' + tank.contents.so2 + '\n'
+                    + '% Alc:    ' + tank.contents.alcohol + '%\n'
+                    + 'TA:       ' + tank.contents.ta + '\n'
+                    + 'VA:       ' + tank.contents.va + '\n'
+                    + 'MA:       ' + tank.contents.ma + '\n'
+                    + 'RS:       ' + tank.contents.rs;
+
+                var analysis = new Kinetic.Text({
+                    text: tank.contents.id !== null ? analysisText : 'Empty',
+                    fontSize: 16,
+                    fontFamily: 'Courier',
+                    fill: '#555',
+                    width: 250,
+                    x: $scope.getTankRadius(tank) + 10,
+                    y: -$scope.getTankRadius(tank),
+                    visible: false
+                });
+
+                var name = new Kinetic.Text({
+                    text: tank.name,
                     fontSize: 18,
                     fontFamily: 'FontAwesome',
                     fill: '#555',
-                    width: 300
+                    width: 200,
+                    x: -40,
+                    y: -$scope.getTankRadius(tank) - 20
                 });
 
                 layer.on('mouseover', function () {
                     document.body.style.cursor = 'pointer';
+                    analysis.show();
+                    layer.draw();
                 });
                 layer.on('mouseout', function () {
                     document.body.style.cursor = 'default';
+                    analysis.hide();
+                    layer.draw();
                 });
 
                 layer.on('dragend', function () {
@@ -122,10 +154,38 @@ app.directive('tankCanvas', function () {
                 });
                 
                 group.add(circle);
-                group.add(text);
+                group.add(contents);
+                group.add(name);
+                group.add(analysis);
                 layer.add(group);
                 $scope.stage.add(layer);
             };
+
+            $scope.getTankRadius = function (tank) {
+                var minRadius = 40;
+                var maxRadiusDifference = 80;
+                var largestExpectedNumberOfGallons = 100000;
+
+                return (((tank.gallons / largestExpectedNumberOfGallons) * maxRadiusDifference) + minRadius);
+            };
+
+            $scope.getContentsRadius = function (tank) {
+                var tankRadius = $scope.getTankRadius(tank);
+                var radius = ((tank.contents.gallons / tank.gallons) * tankRadius);
+                if (tankRadius - radius < 4) {
+                    radius -= 5;
+                }
+                return radius;
+            };
+
+            $scope.contentStateToColorMap = [
+                '#CCC',
+                '#CCC',
+                'blue',
+                'green',
+                'orange',
+                'black'
+            ];
         }]
     };
 });
