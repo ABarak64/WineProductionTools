@@ -20,8 +20,8 @@
         <label>RS</label>
         <input class="form-control" type="number" ng-model="contents.rs" pattern="\d+" placeholder="Reducing sugar of contents"/>
         <br />
+        <model-state-error-display errors=errors></model-state-error-display>
         <button class="btn btn-lg btn-primary" ng-click="save()">Save</button>
         <a href="#/tankdashboard/{{tankId}}" class="btn btn-lg btn-primary">Cancel</a>
-        <model-state-error-display errors=errors></model-state-error-display>
     </div>
 </div>

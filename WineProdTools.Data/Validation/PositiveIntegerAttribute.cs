@@ -17,7 +17,7 @@ namespace WineProdTools.Data.Validation
                 return new ValidationResult(errorMsg);
             if (!((double)value % 1 == 0))
                 return new ValidationResult(errorMsg);
-            if ((double)value <= 0)
+            if ((double)value < 0)
                 return new ValidationResult(errorMsg);
             return ValidationResult.Success;
         }

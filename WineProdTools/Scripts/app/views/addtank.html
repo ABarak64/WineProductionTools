@@ -6,8 +6,8 @@
         <label>Gallons</label>
         <input class="form-control" type="number" ng-model="tank.gallons" min="1" step="1" pattern="\d+" placeholder="Number of gallons it holds"/>
         <br />
+        <model-state-error-display errors=errors></model-state-error-display>
         <button class="btn btn-lg btn-primary" ng-click="add()">Add</button>
         <a href="#/tanks" class="btn btn-lg btn-primary">Cancel</a>
-        <model-state-error-display errors=errors></model-state-error-display>
     </div>
 </div>
