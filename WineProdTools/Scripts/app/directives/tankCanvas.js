@@ -96,6 +96,7 @@ app.directive('tankCanvas', function () {
                 });
 
                 var analysisText = 'Name:     ' + tank.contents.name + '\n'
+                    + 'State:    ' + tank.contents.state.name + '\n'
                     + 'Gallons:  ' + tank.contents.gallons + '\n'
                     + 'pH:       ' + tank.contents.ph + '\n'
                     + 'SO2:      ' + tank.contents.so2 + '\n'
