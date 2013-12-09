@@ -129,6 +129,7 @@ app.directive('tankCanvas', function () {
 
                 layer.on('mouseover', function () {
                     document.body.style.cursor = 'pointer';
+                    layer.moveToTop();
                     analysis.show();
                     layer.draw();
                 });
