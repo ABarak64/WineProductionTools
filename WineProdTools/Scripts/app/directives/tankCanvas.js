@@ -122,9 +122,13 @@ app.directive('tankCanvas', function () {
                     fontSize: 18,
                     fontFamily: 'FontAwesome',
                     fill: '#555',
-                    width: 200,
-                    x: -40,
-                    y: -$scope.getTankRadius(tank) - 20
+                     width: circle.getWidth(),
+                    align: 'center',
+                });
+
+                name.setOffset({
+                    x: name.getWidth() / 2,
+                    y: $scope.getTankRadius(tank) + name.getHeight() + 5
                 });
 
                 layer.on('mouseover', function () {
