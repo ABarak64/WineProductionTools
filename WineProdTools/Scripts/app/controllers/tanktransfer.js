@@ -16,7 +16,7 @@ app.controller('TankTransferCtrl', ['$scope', '$routeParams', '$location', 'Tank
         var data = promise.data;
         data.xPosition = 100;   // Don't care where the tank is supposed to be, this is only for static display purposes.
         data.yPosition = 100;
-        $scope.transfer = $.extend(true, {}, data.contents);
+        $scope.transfer = angular.copy(data.contents);
         $scope.transfer.state = $scope.states.filter(function (state) { return state.id === data.contents.state.id; })[0];
         $scope.transfer.gallons = null;
         $scope.tanks.push(data);
@@ -31,9 +31,9 @@ app.controller('TankTransferCtrl', ['$scope', '$routeParams', '$location', 'Tank
     $scope.transferTank = function () {
         var gallonsToTransfer = $scope.transfer.gallons;
         if ($scope.analysis === 'to') {
-            $scope.transfer = $.extend(true, {}, $scope.tanks[1].contents);
+            $scope.transfer = angular.copy($scope.tanks[1].contents);
         } else if ($scope.analysis === 'from') {
-            $scope.transfer = $.extend(true, {}, $scope.tanks[0].contents);
+            $scope.transfer = angular.copy($scope.tanks[0].contents);
         }
         $scope.transfer.gallons = gallonsToTransfer;
         $scope.transfer.fromId = $routeParams.fromTankId;

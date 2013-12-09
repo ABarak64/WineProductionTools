@@ -9,7 +9,7 @@ app.controller('EmptyTankCtrl', ['$scope', '$routeParams', '$location', 'Tanks',
         data.xPosition = 100;   // Don't care where the tank is supposed to be, this is only for static display purposes.
         data.yPosition = 100;
         $scope.tank = [data];
-        $scope.transfer = $.extend(true, {}, data.contents);
+        $scope.transfer = angular.copy(data.contents);
         $scope.transfer.gallons = null;
     });
 
