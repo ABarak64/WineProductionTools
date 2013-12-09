@@ -25,7 +25,8 @@ app.directive('tankCanvas', function () {
             $scope.stage = new Kinetic.Stage({
                 container: 'container',
                 width: window.innerWidth,
-                height: window.innerHeight
+                height: window.innerHeight,
+                draggable: true
             });
        
             $scope.drawTheTanks = function () {
@@ -169,10 +170,13 @@ app.directive('tankCanvas', function () {
                     // Otherwise we would get the x value without taking into account that the scale has changed.
                     var oldScale = $scope.stage.getScale().x;
                     $scope.stage.setScale(1);
-                    moved.xPosition = parseInt(circle.getAbsolutePosition().x);
-                    moved.yPosition = parseInt(circle.getAbsolutePosition().y);
+                    // Account for offset after user has panned somewhere by dragging the stage.
+                    var stagePosition = $scope.stage.getPosition();
+                    moved.xPosition = parseInt(circle.getAbsolutePosition().x) - stagePosition.x;
+                    moved.yPosition = parseInt(circle.getAbsolutePosition().y) - stagePosition.y;
                     $scope.stage.setScale(oldScale);
                     $scope.$emit('tankMoved', moved);
+
                 });
 
                 layer.on('click', function () {
