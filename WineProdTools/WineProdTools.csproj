@@ -217,6 +217,7 @@
     <Content Include="Scripts\app\controllers\tanktransfer.js" />
     <Content Include="Scripts\app\controllers\transfers.js" />
     <Content Include="Scripts\app\directives\alert.js" />
+    <Content Include="Scripts\app\directives\angular-mousewheel.js" />
     <Content Include="Scripts\app\directives\btnRadio.js" />
     <Content Include="Scripts\app\directives\modelStateErrorDisplay.js" />
     <Content Include="Scripts\app\directives\ng-infinite-scroll.js" />
@@ -239,6 +240,7 @@
     <Content Include="Scripts\app\views\tanks.html" />
     <Content Include="Scripts\app\views\tanktransfer.html" />
     <Content Include="Scripts\app\views\transfers.html" />
+    <Content Include="Scripts\hamster.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

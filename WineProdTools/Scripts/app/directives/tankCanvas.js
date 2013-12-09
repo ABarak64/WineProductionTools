@@ -16,6 +16,12 @@ app.directive('tankCanvas', function () {
                 $scope.drawTheTanks();
             });
 
+            $scope.zoom = function ($event, $delta, $deltaX, $deltaY) {
+                $event.preventDefault();
+                $scope.stage.setScale($scope.stage.getScale().x + (0.10 * $delta));
+                $scope.stage.draw();
+            };
+
             $scope.stage = new Kinetic.Stage({
                 container: 'container',
                 width: window.innerWidth,
@@ -160,8 +166,12 @@ app.directive('tankCanvas', function () {
                     var moved = $scope.tanks.filter(function (tank) {
                         return tank.id === circle.attrs.id;
                     })[0];
-                    moved.xPosition = circle.getAbsolutePosition().x;
-                    moved.yPosition = circle.getAbsolutePosition().y;
+                    // Otherwise we would get the x value without taking into account that the scale has changed.
+                    var oldScale = $scope.stage.getScale().x;
+                    $scope.stage.setScale(1);
+                    moved.xPosition = parseInt(circle.getAbsolutePosition().x);
+                    moved.yPosition = parseInt(circle.getAbsolutePosition().y);
+                    $scope.stage.setScale(oldScale);
                     $scope.$emit('tankMoved', moved);
                 });
 
