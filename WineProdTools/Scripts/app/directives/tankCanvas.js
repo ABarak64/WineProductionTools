@@ -131,6 +131,19 @@ app.directive('tankCanvas', function () {
                     y: $scope.getTankRadius(tank) + name.getHeight() + 5
                 });
 
+                var contentsName = new Kinetic.Text({
+                    text: tank.contents.id !== null ? tank.contents.name : '',
+                    fontSize: 16,
+                    fontFamily: 'FontAwesome',
+                    fill: '#555',
+                    width: circle.getWidth(),
+                    align: 'center',
+                });
+
+                contentsName.setOffset({
+                    x: name.getWidth() / 2
+                });
+
                 layer.on('mouseover', function () {
                     document.body.style.cursor = 'pointer';
                     layer.moveToTop();
@@ -161,6 +174,7 @@ app.directive('tankCanvas', function () {
                 
                 group.add(circle);
                 group.add(contents);
+                group.add(contentsName);
                 group.add(name);
                 group.add(analysis);
                 layer.add(group);
