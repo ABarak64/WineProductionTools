@@ -3,18 +3,18 @@
         <h2>Tank Transfers</h2>
         <button class="btn-lg btn-primary" ng-click="externalSelected()">External</button>
     </div>
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-7 col-md-offset-2">
         <div class="panel panel-default">
           <div class="panel-heading">How to use this page</div>
           <ul class="list-group">
               <li class="list-group-item">To transfer between tanks, click the tank to transfer from, and then the tank to transfer to.</li>
-              <li class="list-group-item">To fill a tank, click 'External' and then click the tank to fill.</li>
-              <li class="list-group-item">To empty a tank, click the tank to empty and then click 'External'.</li>
+              <li class="list-group-item">Click 'External' with the desired tank to fill and empty tanks.</li>
+              <li class="list-group-item">Use your mousewheel to zoom in and out, click and drag the floor to move around.</li>
           </ul>
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row transferMessage">
     <div class="col-md-12">
         <div ng-repeat="alert in transferMessages">
             <alert type="alert.type" close="endTransfer()">{{alert.msg}}</alert>

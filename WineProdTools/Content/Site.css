@@ -239,6 +239,11 @@ footer {
     font-size: 80%;
 }
 
+/* Transfers page */ 
+.transferMessage {
+    min-height: 80px;
+}
+
 /* Wine Tools Forms */
 .btn-group {
     margin-bottom: 10px;
