@@ -5,8 +5,7 @@ app.directive('tankCanvas', function () {
         restrict: 'E',
         scope: {
             tanks: '=',
-            toggleMoveTanks: '@',
-            showExternal: '@'
+            toggleMoveTanks: '@'
         },
         templateUrl: 'Scripts/app/views/partials/tankCanvas.html',
         controller: ['$scope', '$attrs', function ($scope, $attrs) {
@@ -33,52 +32,7 @@ app.directive('tankCanvas', function () {
                 angular.forEach($scope.tanks, function (tank) {
                     $scope.drawTank(tank);
                 });
-                if ($scope.showExternal === 'true') {
-                    $scope.drawExternal();
-                };
             };
-
-            $scope.drawExternal = function () {
-                var layer = new Kinetic.Layer();
-                
-                var group = new Kinetic.Group({
-                    x: 50,
-                    y: 50
-                });
-
-                var rect = new Kinetic.Rect({
-                    width: 80,
-                    height: 50,
-                    stroke: '#CCC',
-                    strokeWidth: 4
-                });
-
-                var text = new Kinetic.Text({
-                    text: 'External',
-                    fontSize: 18,
-                    fontFamily: 'FontAwesome',
-                    fill: '#555',
-                    width: 300,
-                    x: 10,
-                    y: 18
-                });
-
-                layer.on('mouseover', function () {
-                    document.body.style.cursor = 'pointer';
-                });
-                layer.on('mouseout', function () {
-                    document.body.style.cursor = 'default';
-                });
-
-                layer.on('click', function () {
-                    $scope.$emit('externalSelected');
-                });
-
-                group.add(rect);
-                group.add(text);
-                layer.add(group);
-                $scope.stage.add(layer);
-            }
 
             $scope.drawTank = function (tank) {
                 var layer = new Kinetic.Layer({

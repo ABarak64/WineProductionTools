@@ -43,7 +43,7 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
         $scope.$apply();
     });
 
-    $scope.$on('externalSelected', function (event) {
+    $scope.externalSelected = function () {
         // If the user is starting a transfer.
         if ($scope.transfer === null) {
             $scope.transfer = {
@@ -56,8 +56,7 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
             $scope.transfer.to = 'external';
             $scope.redirectToTransfer();
         }
-        $scope.$apply();
-    });
+    }
 
     $scope.endTransfer = function () {
         $scope.transfer = null;
