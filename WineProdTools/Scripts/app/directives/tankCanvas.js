@@ -24,11 +24,9 @@ app.directive('tankCanvas', function () {
             $scope.stage = new Kinetic.Stage({
                 container: 'container',
                 width: $element.parent().width(),
-                height: $element.parent().height(),
+                height: $element.parent().height() <= 10 ? 700 : $element.parent().height(),
                 draggable: true
             });
-
-            console.log($element.parent());
        
             $scope.drawTheTanks = function () {
                 angular.forEach($scope.tanks, function (tank) {
