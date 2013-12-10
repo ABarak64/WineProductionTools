@@ -73,8 +73,24 @@ app.directive('tankCanvas', function () {
                     fontFamily: 'Courier',
                     fill: '#555',
                     width: 250,
-                    x: $scope.getTankRadius(tank) + 10,
+                    x: $scope.getTankRadius(tank) + 20,
                     y: -$scope.getTankRadius(tank),
+                    visible: false
+                });
+
+                var analysisBackground = new Kinetic.Rect({
+                    x: $scope.getTankRadius(tank) + 10,
+                    y: -$scope.getTankRadius(tank) - 10,
+                    stroke: '#555',
+                    strokeWidth: 2,
+                    fill: '#eee',
+                    width: tank.contents.id !== null ? 260 : 75,
+                    height: analysis.getHeight() + 20,
+                    shadowColor: 'black',
+                    shadowBlur: 10,
+                    shadowOffset: [7, 7],
+                    shadowOpacity: 0.2,
+                    opacity: 0.7,
                     visible: false
                 });
 
@@ -109,11 +125,13 @@ app.directive('tankCanvas', function () {
                     document.body.style.cursor = 'pointer';
                     layer.moveToTop();
                     analysis.show();
+                    analysisBackground.show();
                     layer.draw();
                 });
                 layer.on('mouseout', function () {
                     document.body.style.cursor = 'default';
                     analysis.hide();
+                    analysisBackground.hide();
                     layer.draw();
                 });
 
@@ -144,6 +162,7 @@ app.directive('tankCanvas', function () {
                 group.add(contents);
                 group.add(contentsName);
                 group.add(name);
+                group.add(analysisBackground);
                 group.add(analysis);
                 layer.add(group);
                 $scope.stage.add(layer);
