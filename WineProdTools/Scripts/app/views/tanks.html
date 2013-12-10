@@ -5,15 +5,20 @@
             <a href="#/addtank" class="list-group-item">Add Tank</a>
         </div>
     </div>
-    <div class="col-md-6 col-md-offset-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">How to use this page</div>
-          <ul class="list-group">
-            <li class="list-group-item">Click and drag tanks around to change their position. Make it look like your actual winery!</li>
+    <div class="col-md-3 col-md-offset-7">
+        <div class="panel panel-primary">
+          <div class="panel-heading" ng-click="hideHints = !hideHints">How do I use this page?</div>
+          <ul class="list-group" collapse="hideHints">
+              <li class="list-group-item">Click and drag tanks around to change their position. Make it look like your actual winery!</li>
             <li class="list-group-item">Click an individual tank for more options relating to it.</li>
+              <li class="list-group-item">Click 'Add Tank' to add an entirely new tank to the floor.</li>
             <li class="list-group-item">Use your mousewheel to zoom in and out, click and drag the floor to move around.</li>
           </ul>
         </div>
     </div>
-    <tank-canvas tanks=tanks toggle-move-tanks=true></tank-canvas>
+</div>
+<div class="row">
+    <div class="col-md-12 tankCanvasRow">
+        <tank-canvas tanks=tanks toggle-move-tanks=true></tank-canvas>
+    </div>
 </div>

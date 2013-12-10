@@ -241,7 +241,21 @@ footer {
 
 /* Transfers page */ 
 .transferMessage {
+    margin-top: 10px;
     min-height: 80px;
+}
+
+.tankCanvasRow {
+    position: absolute;
+    bottom: 5px;
+    top: 290px;
+    width: 74%;
+    z-index: -1;
+}
+
+.panel-heading {
+    text-align: center;
+    cursor: pointer;
 }
 
 /* Wine Tools Forms */

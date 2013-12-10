@@ -4,6 +4,7 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
 
     $scope.transfer = null;
     $scope.transferMessages = [];
+    $scope.hideHints = true;
 
     Tanks.getTanks().success(function (data) {
         $scope.tanks = data;

@@ -2,6 +2,8 @@
 
 app.controller('TanksCtrl', ['$scope', '$location', 'Tanks', function ($scope, $location, Tanks) {
 
+    $scope.hideHints = true;
+
     Tanks.getTanks().success(function (data) {
         $scope.tanks = data;
     });
