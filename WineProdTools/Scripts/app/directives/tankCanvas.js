@@ -29,19 +29,19 @@ app.directive('tankCanvas', function () {
             });
        
             $scope.drawTheTanks = function () {
+                $scope.layer = new Kinetic.Layer();
+                $scope.stage.add($scope.layer);
                 angular.forEach($scope.tanks, function (tank) {
                     $scope.drawTank(tank);
                 });
             };
 
             $scope.drawTank = function (tank) {
-                var layer = new Kinetic.Layer({
-                        draggable: ($scope.toggleMoveTanks === 'true')
-                });
 
                 var group = new Kinetic.Group({
                     x: tank.xPosition,
-                    y: tank.yPosition
+                    y: tank.yPosition,
+                    draggable: ($scope.toggleMoveTanks === 'true')
                 });
 
                 var circle = new Kinetic.Circle({
@@ -74,8 +74,7 @@ app.directive('tankCanvas', function () {
                     fill: '#555',
                     width: 250,
                     x: $scope.getTankRadius(tank) + 20,
-                    y: -$scope.getTankRadius(tank),
-                    visible: false
+                    y: -$scope.getTankRadius(tank)
                 });
 
                 var analysisBackground = new Kinetic.Rect({
@@ -90,8 +89,7 @@ app.directive('tankCanvas', function () {
                     shadowBlur: 10,
                     shadowOffset: [7, 7],
                     shadowOpacity: 0.2,
-                    opacity: 0.7,
-                    visible: false
+                    opacity: 0.7
                 });
 
                 var name = new Kinetic.Text({
@@ -121,21 +119,62 @@ app.directive('tankCanvas', function () {
                     x: name.getWidth() / 2
                 });
 
-                layer.on('mouseover', function () {
-                    document.body.style.cursor = 'pointer';
-                    layer.moveToTop();
-                    analysis.show();
-                    analysisBackground.show();
-                    layer.draw();
-                });
-                layer.on('mouseout', function () {
-                    document.body.style.cursor = 'default';
-                    analysis.hide();
-                    analysisBackground.hide();
-                    layer.draw();
+                // This guy allows us a floating shape above all the others to hook mouse events
+                //    to, otherwise mouseon mouseout gets triggered on every item inside the circle.
+                var invisibleCircle = new Kinetic.Circle({
+                    radius: $scope.getTankRadius(tank) + 5,
+                    strokeWidth: 4,
+                    opacity: 0,
+                    fill: 'black'
                 });
 
-                layer.on('dragend', function () {
+                var tankGroup = new Kinetic.Group();
+                var analysisGroup = new Kinetic.Group({
+                    opacity: 0,
+                    visible: false
+                });
+
+                tankGroup.add(circle);
+                tankGroup.add(contents);
+                tankGroup.add(contentsName);
+                tankGroup.add(name);
+                tankGroup.add(invisibleCircle);
+                analysisGroup.add(analysisBackground);
+                analysisGroup.add(analysis);
+                group.add(tankGroup);
+                group.add(analysisGroup);
+                $scope.layer.add(group);
+
+                var tween = new Kinetic.Tween({
+                    node: tankGroup,
+                    duration: 0.2,
+                    scaleX: 1.15,
+                    scaleY: 1.15
+                });
+
+                var analysisTween = new Kinetic.Tween({
+                    node: analysisGroup,
+                    duration: 0.4,
+                    opacity: 1
+                });
+
+                invisibleCircle.on('mouseover', function () {
+                    document.body.style.cursor = 'pointer';
+                    analysisGroup.show();
+                    group.moveToTop();
+                    $scope.layer.draw();
+                    tween.play();
+                    analysisTween.play();
+                });
+                invisibleCircle.on('mouseout', function () {
+                    document.body.style.cursor = 'default';
+                    analysisGroup.hide();
+                    $scope.layer.draw();
+                    tween.reverse();
+                    analysisTween.reverse();
+                });
+
+                group.on('dragend', function () {
                     var moved = $scope.tanks.filter(function (tank) {
                         return tank.id === circle.attrs.id;
                     })[0];
@@ -151,21 +190,12 @@ app.directive('tankCanvas', function () {
 
                 });
 
-                layer.on('click', function () {
+                group.on('click', function () {
                     var selected = $scope.tanks.filter(function (tank) {
                         return tank.id === circle.attrs.id;
                     })[0];
                     $scope.$emit('tankSelected', selected);
                 });
-                
-                group.add(circle);
-                group.add(contents);
-                group.add(contentsName);
-                group.add(name);
-                group.add(analysisBackground);
-                group.add(analysis);
-                layer.add(group);
-                $scope.stage.add(layer);
             };
 
             $scope.getTankRadius = function (tank) {
