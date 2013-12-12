@@ -24,7 +24,7 @@ app.directive('tankCanvas', function () {
             $scope.stage = new Kinetic.Stage({
                 container: 'container',
                 width: $element.parent().width(),
-                height: $element.parent().height() <= 10 ? 700 : $element.parent().height(),
+                height: $element.parent().height() <= 10 ? 600 : $element.parent().height(),
                 draggable: true
             });
        
@@ -51,8 +51,14 @@ app.directive('tankCanvas', function () {
                     id: tank.id
                 });
 
-                var contents = new Kinetic.Circle({
-                    radius: $scope.getContentsRadius(tank),
+                var contents = new Kinetic.Shape({
+                    drawFunc: function (context) {
+                        context.beginPath();
+                        context.arc(0, 0, $scope.getTankRadius(tank) - 5, 0, $scope.getContentsArc(tank));
+                        context.lineTo(0, 0);
+                        context.closePath();
+                        context.fillStrokeShape(this);
+                    },
                     fill: $scope.contentStateToColorMap[tank.contents.state.id].contents
                 });
 
@@ -197,13 +203,9 @@ app.directive('tankCanvas', function () {
                 return (((tank.gallons / largestExpectedNumberOfGallons) * maxRadiusDifference) + minRadius);
             };
 
-            $scope.getContentsRadius = function (tank) {
-                var tankRadius = $scope.getTankRadius(tank);
-                var radius = ((tank.contents.gallons / tank.gallons) * tankRadius);
-                if (tankRadius - radius < 4) {
-                    radius -= 5;
-                }
-                return radius;
+            $scope.getContentsArc = function (tank) {
+                var arc = ((tank.contents.gallons / tank.gallons) * Math.PI * 2);
+                return arc;
             };
 
             $scope.contentStateToColorMap = [
