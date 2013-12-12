@@ -1,9 +1,9 @@
 ﻿<div class="row">
-    <div class="col-md-3">
-        <h2>Tank Transfers</h2>
+    <h2>Tank Transfers</h2>
+    <div class="col-md-3" ng-hide="loading">
         <button class="btn-lg btn-primary" ng-click="externalSelected()">External</button>
     </div>
-    <div class="col-md-3 col-md-offset-6">
+    <div class="col-md-3 col-md-offset-6" ng-hide="loading">
         <div class="panel panel-primary">
           <div class="panel-heading" ng-click="hideHints = !hideHints">How do I use this page?</div>
           <ul class="list-group" collapse="hideHints">

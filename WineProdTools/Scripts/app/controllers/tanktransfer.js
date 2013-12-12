@@ -6,6 +6,7 @@ app.controller('TankTransferCtrl', ['$scope', '$routeParams', '$location', 'Tank
     $scope.analysis = 'from';
     $scope.tanks = [];
     $scope.transferAll = true;
+    $scope.$parent.loading = true;
 
     Tanks.getContentStates()
     .then(function (promise) {
@@ -15,7 +16,7 @@ app.controller('TankTransferCtrl', ['$scope', '$routeParams', '$location', 'Tank
     }).then(function (promise) {
         var data = promise.data;
         data.xPosition = 200;   // Don't care where the tank is supposed to be, this is only for static display purposes.
-        data.yPosition = 250;
+        data.yPosition = 150;
         data.name = "From: " + data.name;
         $scope.transfer = angular.copy(data.contents);
         $scope.transfer.state = $scope.states.filter(function (state) { return state.id === data.contents.state.id; })[0];
@@ -25,10 +26,13 @@ app.controller('TankTransferCtrl', ['$scope', '$routeParams', '$location', 'Tank
     }).then(function (promise) {
         var data = promise.data;
         data.xPosition = 200;   // Don't care where the tank is supposed to be, this is only for static display purposes.
-        data.yPosition = 550;
+        data.yPosition = 380;
         data.name = "To: " + data.name;
         $scope.tanks.push(data);
         $scope.tanks = angular.copy($scope.tanks); // Trigger the watch without having to deep watch.
+        $scope.$parent.loading = false;
+    }, function () {
+        $scope.$parent.loading = false;
     });
 
     $scope.transferTank = function () {

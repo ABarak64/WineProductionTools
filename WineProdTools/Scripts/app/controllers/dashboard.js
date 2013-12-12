@@ -2,21 +2,24 @@
 
 app.controller('DashboardCtrl', ['$scope', '$routeParams', 'Accounts', 'Notes', function ($scope, $routeParams, Accounts, Notes) {
 
+    $scope.loadingNotes = false;
+    $scope.$parent.loading = true;
+    $scope.notes = [];
+    $scope.noMoreNotes = false;
     $scope.account = {
         name: 'Loading Winery...'
     };
 
-    $scope.loading = false;
-    $scope.notes = [];
-    $scope.noMoreNotes = false;
-
     Accounts.getAccount().success(function (data) {
         $scope.account = data;
+        $scope.$parent.loading = false;
+    }).error(function () {
+        $scope.$parent.loading = false;
     });
 
     $scope.loadMoreNotes = function () {
-        if ($scope.loading) return;
-        $scope.loading = true;
+        if ($scope.loadingNotes) return;
+        $scope.loadingNotes = true;
         Notes.getSomeNotesAfterThisMany($scope.notes.length).success(function (data) {
             if (data.length === 0) {
                 $scope.noMoreNotes = true;
@@ -25,7 +28,7 @@ app.controller('DashboardCtrl', ['$scope', '$routeParams', 'Accounts', 'Notes', 
                     $scope.notes.push(note);
                 });
             }
-            $scope.loading = false;
+            $scope.loadingNotes = false;
         });
     };
 }]);

@@ -1,11 +1,11 @@
 ﻿<div class="row">
-    <div class="col-md-2">
-        <h2>Tank Setup</h2>
+    <h2>Tank Setup</h2>
+    <div class="col-md-2" ng-hide="loading">
         <div class="list-group">
             <a href="#/addtank" class="list-group-item">Add Tank</a>
         </div>
     </div>
-    <div class="col-md-3 col-md-offset-7">
+    <div class="col-md-3 col-md-offset-7" ng-hide="loading">
         <div class="panel panel-primary">
           <div class="panel-heading" ng-click="hideHints = !hideHints">How do I use this page?</div>
           <ul class="list-group" collapse="hideHints">

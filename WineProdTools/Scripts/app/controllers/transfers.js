@@ -5,9 +5,13 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
     $scope.transfer = null;
     $scope.transferMessages = [];
     $scope.hideHints = true;
+    $scope.$parent.loading = true;
 
     Tanks.getTanks().success(function (data) {
         $scope.tanks = data;
+        $scope.$parent.loading = false;
+    }).error(function () {
+        $scope.$parent.loading = false;
     });
 
     $scope.redirectToTransfer = function () {

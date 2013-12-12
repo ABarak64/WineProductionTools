@@ -4,6 +4,7 @@ app.controller('EditContentsCtrl', ['$scope', '$routeParams', '$location', 'Tank
 
     $scope.errors = null;
     $scope.tankId = $routeParams.tankId;
+    $scope.$parent.loading = true;
 
     Tanks.getContentStates().success(function (data) {
         $scope.states = data;
@@ -15,7 +16,10 @@ app.controller('EditContentsCtrl', ['$scope', '$routeParams', '$location', 'Tank
             $scope.contents = data.contents;
             $scope.contents.state = $scope.states.filter(function (state) { return state.id === data.contents.state.id; })[0];
             $scope.contents.tankId = $scope.tankId;
+            $scope.$parent.loading = false;
         });
+    }, function () {
+        $scope.$parent.loading = false;
     });
 
     $scope.save = function () {

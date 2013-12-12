@@ -2,11 +2,15 @@
 
 app.controller('EditAccountCtrl', ['$scope', '$location', 'Accounts', function ($scope, $location, Accounts) {
 
+    $scope.errors = null;
+    $scope.$parent.loading = true;
+
     Accounts.getAccount().success(function (data) {
         $scope.account = data;
+        $scope.$parent.loading = false;
+    }).error(function () {
+        $scope.$parent.loading = false;
     });
-
-    $scope.errors = null;
 
     $scope.save = function () {
         Accounts.updateAccount($scope.account).success(function (data) {
