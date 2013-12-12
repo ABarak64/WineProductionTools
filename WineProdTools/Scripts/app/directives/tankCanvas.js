@@ -31,9 +31,24 @@ app.directive('tankCanvas', function () {
             $scope.drawTheTanks = function () {
                 $scope.layer = new Kinetic.Layer();
                 $scope.stage.add($scope.layer);
-                angular.forEach($scope.tanks, function (tank) {
-                    $scope.drawTank(tank);
-                });
+                
+                var imageObj = new Image();
+                imageObj.src = '/Images/grid.png';
+                imageObj.onload = function () {
+                    var rect = new Kinetic.Rect({
+                        x: 0,
+                        y: 0,
+                        width: 2883,
+                        height: 1803,
+                        fillPatternImage: imageObj,
+                        fillPatternRepeat: 'repeat'
+                    });
+                    $scope.layer.add(rect);
+
+                    angular.forEach($scope.tanks, function (tank) {
+                        $scope.drawTank(tank);
+                    });
+                };
             };
 
             $scope.drawTank = function (tank) {
