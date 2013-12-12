@@ -46,14 +46,14 @@ app.directive('tankCanvas', function () {
 
                 var circle = new Kinetic.Circle({
                     radius: $scope.getTankRadius(tank),
-                    stroke: $scope.contentStateToColorMap[tank.contents.state.id],
+                    stroke: $scope.contentStateToColorMap[tank.contents.state.id].tank,
                     strokeWidth: 4,
                     id: tank.id
                 });
 
                 var contents = new Kinetic.Circle({
                     radius: $scope.getContentsRadius(tank),
-                    fill: $scope.contentStateToColorMap[tank.contents.state.id]
+                    fill: $scope.contentStateToColorMap[tank.contents.state.id].contents
                 });
 
                 var analysisText = 'Name:     ' + tank.contents.name + '\n'
@@ -110,7 +110,7 @@ app.directive('tankCanvas', function () {
                     text: tank.contents.id !== null ? tank.contents.name : '',
                     fontSize: 16,
                     fontFamily: 'FontAwesome',
-                    fill: '#555',
+                    fill: '#333',
                     width: circle.getWidth(),
                     align: 'center',
                 });
@@ -207,12 +207,12 @@ app.directive('tankCanvas', function () {
             };
 
             $scope.contentStateToColorMap = [
-                '#CCC',
-                '#CCC',
-                'blue',
-                'green',
-                'orange',
-                'black'
+                { tank: '#999', contents: '#CCC' },
+                { tank: '#999', contents: '#CCC' },
+                { tank: '#2f80c1', contents: '#7fb5e0' },
+                { tank: '#30a638', contents: '#81df88' },
+                { tank: 'orange', contents: '#ffc68a' },
+                { tank: '#222', contents: '#696969' }
             ];
         }]
     };
