@@ -81,13 +81,13 @@ app.directive('tankCanvas', function () {
                     x: $scope.getTankRadius(tank) + 10,
                     y: -$scope.getTankRadius(tank) - 10,
                     stroke: '#555',
-                    strokeWidth: 2,
+                    strokeWidth: 1,
                     fill: '#eee',
                     width: tank.contents.id !== null ? 260 : 75,
                     height: analysis.getHeight() + 20,
                     shadowColor: 'black',
                     shadowBlur: 10,
-                    shadowOffset: [7, 7],
+                    shadowOffset: [4, 4],
                     shadowOpacity: 0.2,
                     opacity: 0.7
                 });
@@ -130,7 +130,6 @@ app.directive('tankCanvas', function () {
 
                 var tankGroup = new Kinetic.Group();
                 var analysisGroup = new Kinetic.Group({
-                    opacity: 0,
                     visible: false
                 });
 
@@ -152,26 +151,18 @@ app.directive('tankCanvas', function () {
                     scaleY: 1.15
                 });
 
-                var analysisTween = new Kinetic.Tween({
-                    node: analysisGroup,
-                    duration: 0.4,
-                    opacity: 1
-                });
-
                 invisibleCircle.on('mouseover', function () {
                     document.body.style.cursor = 'pointer';
                     analysisGroup.show();
                     group.moveToTop();
                     $scope.layer.draw();
                     tween.play();
-                    analysisTween.play();
                 });
                 invisibleCircle.on('mouseout', function () {
                     document.body.style.cursor = 'default';
                     analysisGroup.hide();
                     $scope.layer.draw();
                     tween.reverse();
-                    analysisTween.reverse();
                 });
 
                 group.on('dragend', function () {
