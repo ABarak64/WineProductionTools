@@ -18,6 +18,9 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
         if ($scope.transfer.from === 'external' && $scope.transfer.to === 'external') {
             $scope.endTransfer();
             $scope.transferMessages.push({ type: 'danger', msg: 'You can\'t transfer from external to external.' });
+        } else if ($scope.transfer.from === $scope.transfer.to) {
+            $scope.endTransfer();
+            $scope.transferMessages.push({ type: 'danger', msg: 'You can\'t transfer between the same tank.' });
         } else if ($scope.transfer.from === 'external') {
             $location.path('/filltank/' + $scope.transfer.to);
         } else if ($scope.transfer.to === 'external') {
