@@ -10,6 +10,12 @@ body {
     color: #333;
 }
 
+.jumbotron {
+    background-image: url(/images/tanks.jpg);
+    padding-bottom: 120px;
+    padding-top: 26px;
+}
+
 .signInRow {
     min-height: 325px;
 }
