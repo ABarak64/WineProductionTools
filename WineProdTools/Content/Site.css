@@ -14,6 +14,8 @@ body {
     background-image: url(/images/tanks.jpg);
     padding-bottom: 120px;
     padding-top: 26px;
+    font-size: 200%;
+    color: #911821;
 }
 
 .signInRow {
@@ -41,10 +43,6 @@ button, input[type=submit] {
     max-width: 960px;
     padding-right: 10px;
     padding-left: 10px;
-}
-
-h2 {
-    margin-bottom: 40px;
 }
 
 /*#region forms */
@@ -231,6 +229,116 @@ footer {
 
 /*#endregion */
 
+/* nav bar */
+
+.navbar-default {
+    background-color: #911821;
+    border-color: #c0392b;
+}
+.navbar-default .navbar-brand {
+    color: #ecf0f1;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #ffbbbc;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #ffbbbc;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #ffbbbc;
+    background-color: #c0392b;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #ffbbbc;
+    background-color: #c0392b;
+}
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #ecf0f1;
+    border-bottom-color: #ecf0f1;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #ffbbbc;
+    border-bottom-color: #ffbbbc;
+}
+
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #ffbbbc;
+    border-bottom-color: #ffbbbc;
+}
+.navbar-default .navbar-toggle {
+    border-color: #c0392b;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #c0392b;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ecf0f1;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #ecf0f1;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #ffbbbc;
+    }
+}
+
+.navbar-default a {
+    color: white;
+}
+
+/* Basic */
+
+#main {
+    margin-top: 50px;
+}
+
+/* Text */
+
+h2 {
+    font-size: 260%;
+    color: #911821;
+    margin-bottom: 40px;
+}
+
+/* Buttons */
+
+.btn, .btn-primary {
+    background-color: #911821;
+    border-color: #c0392b;
+}
+
+.btn-primary:hover, .btn:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    background-color: #c0392b;
+    border-color: #c0392b;
+}
+
+/* Panel */
+
+.panel-heading {
+    text-align: center;
+    cursor: pointer;
+}
+
+.panel-primary>.panel-heading, .panel-primary {
+    background-color: #911821;
+    border-color: #911821;
+}
+
 /* Wine Tools Notes */
 .notes {
     height: 450px;
@@ -260,11 +368,6 @@ footer {
     z-index: -1;
 }
 
-.panel-heading {
-    text-align: center;
-    cursor: pointer;
-}
-
 /* Wine Tools Forms */
 .btn-group {
     margin-bottom: 10px;
@@ -281,6 +384,7 @@ label {
 /* stuff for the loading div */
 .loading img {
   width: 120px;
+  height: 40px;
   bottom: 500px;
   left: 0px;
   margin: auto;
