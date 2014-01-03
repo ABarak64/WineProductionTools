@@ -3,27 +3,26 @@
     ViewBag.Title = "Manage User";
 }
 
-<div class="manageAccount">
-    <header>
-        <h1>@ViewBag.Title</h1>
-    </header>
+<div class="container" id="main-content">
+    <div class="row">
+        <h2>@ViewBag.Title</h2>
+        <div class="col-md-12">
+            <p class="message-success">@ViewBag.StatusMessage</p>
 
-    <div id="main-content">
-        <p class="message-success">@ViewBag.StatusMessage</p>
+            <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+            <p>@Html.ActionLink("Back to my Wine Production Tools", "Index", "Home")</p>
 
-        <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
-        <p>@Html.ActionLink("Back to my Wine Production Tools", "Index", "Home")</p>
-
-        <section>
-        @if (ViewBag.HasLocalPassword)
-        {
-            @Html.Partial("_ChangePasswordPartial")
-        }
-        else
-        { 
-            @Html.Partial("_SetPasswordPartial")
-        }
-        </section>
+            <section>
+            @if (ViewBag.HasLocalPassword)
+            {
+                @Html.Partial("_ChangePasswordPartial")
+            }
+            else
+            { 
+                @Html.Partial("_SetPasswordPartial")
+            }
+            </section>
+        </div>
     </div>
 </div>
 

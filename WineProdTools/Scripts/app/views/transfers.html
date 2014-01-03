@@ -4,7 +4,7 @@
         <button class="btn btn-lg btn-primary" ng-click="externalSelected()">External</button>
     </div>
     <div class="col-md-3 col-md-offset-6" ng-hide="loading">
-        <div class="panel panel-primary">
+        <div class="panel panel-primary on-top">
           <div class="panel-heading" ng-click="hideHints = !hideHints">How do I use this page?</div>
           <ul class="list-group" collapse="hideHints">
               <li class="list-group-item">To transfer between tanks, click the tank to transfer from, and then the tank to transfer to.</li>
@@ -16,7 +16,7 @@
     </div>
 </div>
 <div class="row transferMessage">
-    <div class="col-md-12">
+    <div class="col-md-12 on-top">
         <div ng-repeat="alert in transferMessages">
             <alert type="alert.type" close="endTransfer()">{{alert.msg}}</alert>
         </div>

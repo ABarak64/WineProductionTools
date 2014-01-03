@@ -16,6 +16,11 @@ body {
     padding-top: 26px;
     font-size: 200%;
     color: #911821;
+    position: absolute;
+    width: 100%;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-width: 6px;
 }
 
 .signInRow {
@@ -25,10 +30,6 @@ body {
 .logoutForm {
     margin-top: 14px;
     margin-left: 14px;
-}
-
-.manageAccount {
-    margin-left: 400px;
 }
 
 button, input[type=submit] {
@@ -301,18 +302,49 @@ footer {
     color: white;
 }
 
+/* Landing page */
+
+#landing {
+    min-height: 100%;
+    background-color: white;
+    padding-top: 350px;
+}
+
+/* Manage user */
+
+#main-content {
+    background-color: white;
+    height: 100%;
+}
+
 /* Basic */
 
+body {
+    background-color: #dddddd;
+}
+
+.ng-scope, body, html {
+    height: 100%;
+}
+
 #main {
-    margin-top: 50px;
+    padding-top: 50px;
+    background-color: white;
+    min-height: 100%;
+}
+
+.on-top {
+    z-index: 10;
 }
 
 /* Text */
 
 h2 {
-    font-size: 260%;
+    font-size: 240%;
+    margin-left: 15px;
     color: #911821;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 /* Buttons */
@@ -337,6 +369,7 @@ h2 {
 .panel-primary>.panel-heading, .panel-primary {
     background-color: #911821;
     border-color: #911821;
+    position: relative;
 }
 
 /* Wine Tools Notes */
@@ -365,7 +398,6 @@ h2 {
     top: 230px;
     left: 0;
     width: 100%;
-    z-index: -1;
 }
 
 /* Wine Tools Forms */
