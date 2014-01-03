@@ -23,9 +23,14 @@ app.controller('EmptyTankCtrl', ['$scope', '$routeParams', '$location', 'Tanks',
         if ($scope.removeAll) {
             $scope.transfer.gallons = $scope.tank[0].contents.gallons;
         }
+
+        $scope.errors = { modelState: [] };
+        $scope.$parent.waiting = true;
         Tanks.tankTransfer($scope.transfer).success(function (data) {
+            $scope.$parent.waiting = false;
             $location.path('/transfers');
         }).error(function (data) {
+            $scope.$parent.waiting = false;
             $scope.errors = data;
         });
     };

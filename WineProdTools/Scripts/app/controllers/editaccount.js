@@ -13,9 +13,13 @@ app.controller('EditAccountCtrl', ['$scope', '$location', 'Accounts', function (
     });
 
     $scope.save = function () {
+        $scope.errors = { modelState: [] };
+        $scope.$parent.waiting = true;
         Accounts.updateAccount($scope.account).success(function (data) {
+            $scope.$parent.waiting = false;
             $location.path('/dashboard');
         }).error(function (data) {
+            $scope.$parent.waiting = false;
             $scope.errors = data;
         });
     };

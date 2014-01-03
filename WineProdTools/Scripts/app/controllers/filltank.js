@@ -27,9 +27,13 @@ app.controller('FillTankCtrl', ['$scope', '$routeParams', '$location', 'Tanks', 
         $scope.transfer.fromId = 0;
         $scope.transfer.toId = $routeParams.tankId;
 
+        $scope.errors = { modelState: [] };
+        $scope.$parent.waiting = true;
         Tanks.tankTransfer($scope.transfer).success(function (data) {
+            $scope.$parent.waiting = false;
             $location.path('/transfers');
         }).error(function (data) {
+            $scope.$parent.waiting = false;
             $scope.errors = data;
         });
     };

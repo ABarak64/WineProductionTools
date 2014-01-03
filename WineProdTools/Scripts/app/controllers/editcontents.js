@@ -23,9 +23,13 @@ app.controller('EditContentsCtrl', ['$scope', '$routeParams', '$location', 'Tank
     });
 
     $scope.save = function () {
+        $scope.errors = { modelState: [] };
+        $scope.$parent.waiting = true;
         Tanks.updateTankContents($scope.contents).success(function (data) {
+            $scope.$parent.waiting = false;
             $location.path('/tankdashboard/' + $scope.contents.tankId);
         }).error(function (data) {
+            $scope.$parent.waiting = false;
             $scope.errors = data;
         });
     };
