@@ -17,6 +17,7 @@ app.directive('tankCanvas', function () {
 
             $scope.zoom = function ($event, $delta, $deltaX, $deltaY) {
                 $event.preventDefault();
+                $delta = $delta > 0 ? 1 : -1;
                 var currentScale = $scope.stage.getScale().x;
                 if (currentScale < 1.6 && $delta > 0 || currentScale > 0.4 && $delta < 0) {
                     $scope.stage.setScale(currentScale + (0.10 * $delta));
