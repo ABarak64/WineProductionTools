@@ -12,7 +12,6 @@ body {
 
 .jumbotron {
     background-image: url(/images/tanks.jpg);
-    padding-bottom: 120px;
     padding-top: 26px;
     font-size: 200%;
     color: #911821;
@@ -21,10 +20,6 @@ body {
     border-bottom-style: solid;
     border-top-style: solid;
     border-width: 6px;
-}
-
-.signInRow {
-    min-height: 325px;
 }
 
 .logoutForm {
