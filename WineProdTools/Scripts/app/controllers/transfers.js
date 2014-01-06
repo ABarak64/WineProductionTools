@@ -51,6 +51,11 @@ app.controller('TransfersCtrl', ['$scope', '$location', 'Tanks', function ($scop
         $scope.$apply();
     });
 
+    $scope.$on('tankExtraSelected', function (event, tank) {
+        $location.path('/tankdashboard/' + tank.id);
+        $scope.$apply();
+    });
+
     $scope.externalSelected = function () {
         // If the user is starting a transfer.
         if ($scope.transfer === null) {

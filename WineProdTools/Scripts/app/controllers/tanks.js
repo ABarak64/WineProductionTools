@@ -16,7 +16,7 @@ app.controller('TanksCtrl', ['$scope', '$location', 'Tanks', function ($scope, $
         Tanks.updateTank(tank);
     });
 
-    $scope.$on('tankSelected', function (event, tank) {
+    $scope.$on('tankExtraSelected', function (event, tank) {
         $location.path('/tankdashboard/' + tank.id);
         $scope.$apply();
     });

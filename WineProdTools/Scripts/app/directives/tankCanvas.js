@@ -212,6 +212,13 @@ app.directive('tankCanvas', function () {
                     })[0];
                     $scope.$emit('tankSelected', selected);
                 });
+
+                group.on('dblclick', function () {
+                    var selected = $scope.tanks.filter(function (tank) {
+                        return tank.id === circle.attrs.id;
+                    })[0];
+                    $scope.$emit('tankExtraSelected', selected);
+                });
             };
 
             $scope.getTankRadius = function (tank) {
