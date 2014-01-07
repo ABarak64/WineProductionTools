@@ -3,7 +3,7 @@
     <div class="col-md-4" ng-hide="loading">
         <label>Contents Name</label>
         <input type="text" class="form-control" ng-model="transfer.name" placeholder="Enter a name for the contents" required/>
-        <label>Gallons To Add</label>
+        <label>Gallons To Add (room for {{tank[0].gallons - (tank[0].contents.gallons || 0)}} gal)</label>
         <input class="form-control" type="number" ng-model="transfer.gallons" pattern="\d+" placeholder="Number of gallons of content to add"/>
         <div ng-show="tank[0].contents.id !== null">
             <label>Analysis Details</label>

@@ -83,7 +83,7 @@ app.directive('tankCanvas', function () {
 
                 var analysisText = 'Name:     ' + tank.contents.name + '\n'
                     + 'State:    ' + tank.contents.state.name + '\n'
-                    + 'Gallons:  ' + tank.contents.gallons + '\n'
+                    + 'Gallons:  ' + tank.contents.gallons + '/' + tank.gallons + '\n'
                     + 'pH:       ' + tank.contents.ph + '\n'
                     + 'SO2:      ' + tank.contents.so2 + '\n'
                     + '% Alc:    ' + tank.contents.alcohol + '%\n'
@@ -93,7 +93,7 @@ app.directive('tankCanvas', function () {
                     + 'RS:       ' + tank.contents.rs;
 
                 var analysis = new Kinetic.Text({
-                    text: tank.contents.id !== null ? analysisText : 'Empty',
+                    text: tank.contents.id !== null ? analysisText : 'Gallons:  0/' + tank.gallons,
                     fontSize: 16,
                     fontFamily: 'Courier',
                     fill: '#555',
@@ -108,7 +108,7 @@ app.directive('tankCanvas', function () {
                     stroke: '#555',
                     strokeWidth: 1,
                     fill: '#eee',
-                    width: tank.contents.id !== null ? 260 : 75,
+                    width: 260,
                     height: analysis.getHeight() + 20,
                     shadowColor: 'black',
                     shadowBlur: 10,

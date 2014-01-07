@@ -3,7 +3,7 @@
     <div class="col-md-4" ng-hide="loading">
         <label>Contents Name</label>
         <input type="text" class="form-control" ng-model="transfer.name" placeholder="Enter a name for the contents" required/>
-        <label>Gallons To Transfer</label>
+        <label>Gallons To Transfer (room for {{tanks[1].gallons - (tanks[1].contents.gallons || 0)}} gal)</label>
         <div class="btn-group">
             <button type="button" class="btn btn-primary" ng-model="transferAll" btn-radio="true">All</button>
             <button type="button" class="btn btn-primary" ng-model="transferAll" btn-radio="false">Some</button>
