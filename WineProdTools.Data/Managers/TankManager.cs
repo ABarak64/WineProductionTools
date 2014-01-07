@@ -12,9 +12,21 @@ namespace WineProdTools.Data.Managers
 {
     public class TankManager
     {
+        private readonly Func<IWineProdToolsContext> _getNewContext;
+
+        public TankManager()
+        {
+            this._getNewContext = () => { return new WineProdToolsContext(); };
+        }
+
+        public TankManager(Func<IWineProdToolsContext> contextFactory)
+        {
+            this._getNewContext = contextFactory;
+        }
+
         public IEnumerable<TankAndContentsDto> GetTanksForAccount(Int64 accountId)
         {
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 return db.Tanks
                     .Include(t => t.Contents.State)
@@ -27,7 +39,7 @@ namespace WineProdTools.Data.Managers
 
         public IEnumerable<TankContentsState> GetContentStates()
         {
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 return db.TankContentsStates.ToList();
             }
@@ -35,7 +47,7 @@ namespace WineProdTools.Data.Managers
 
         public TankAndContentsDto GetTankForAccount(Int64 tankId, Int64 accountId)
         {
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 return db.Tanks
                     .Include(t => t.Contents.State)
@@ -48,7 +60,7 @@ namespace WineProdTools.Data.Managers
 
         public bool TankWillOverflow(decimal gallonsToAdd, Int64 tankId)
         {
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 var tank = db.Tanks.Include(t => t.Contents)
                     .Single(t => t.Id == tankId);
@@ -63,7 +75,7 @@ namespace WineProdTools.Data.Managers
             {
                 return true;
             }
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 var tank = db.Tanks.Include(t => t.Contents)
                     .Single(t => t.Id == tankId);
@@ -87,7 +99,7 @@ namespace WineProdTools.Data.Managers
                 YPosition = 250
             };
 
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 db.Tanks.Add(tank);
                 db.SaveChanges();
@@ -98,7 +110,7 @@ namespace WineProdTools.Data.Managers
 
         public void UpdateTankForAccount(TankDto tankDto, Int64 accountId)
         {     
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 var tank = db.Tanks.Single(t => t.Id == tankDto.Id);
                 if (tank.AccountId != accountId)
@@ -115,7 +127,7 @@ namespace WineProdTools.Data.Managers
 
         public void UpdateTankContentsForAccount(TankContentsDto contentsDto, Int64 accountId)
         {
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 var tank = db.Tanks.Include(t => t.Contents)
                     .Single(t => t.Id == contentsDto.TankId);
@@ -153,7 +165,7 @@ namespace WineProdTools.Data.Managers
                 if (transferDto.ToId != 0)
                     tankIds.Add(transferDto.ToId);
 
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                  var relevantTanks = db.Tanks.Include(t => t.Contents)
                     .Where(t => tankIds.Contains(t.Id)).ToList();
@@ -218,7 +230,7 @@ namespace WineProdTools.Data.Managers
 
         public void DeleteTankForAccount(Int64 tankId, Int64 accountId)
         {
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 var tank = db.Tanks.Single(t => t.Id == tankId);
                 if (tank.AccountId != accountId)

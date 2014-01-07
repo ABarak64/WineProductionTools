@@ -10,6 +10,18 @@ namespace WineProdTools.Data.Managers
 {
     public class NoteManager
     {
+        private readonly Func<IWineProdToolsContext> _getNewContext;
+
+        public NoteManager()
+        {
+            this._getNewContext = () => { return new WineProdToolsContext(); };
+        }
+
+        public NoteManager(Func<IWineProdToolsContext> contextFactory)
+        {
+            this._getNewContext = contextFactory;
+        }
+
         private static readonly List<TimeType> _timeTypes = new List<TimeType>()
         {
             new TimeType 
@@ -52,7 +64,7 @@ namespace WineProdTools.Data.Managers
 
         public IEnumerable<NoteDto> GetSomeNotesAfterThisManyForAccount(int count, Int64 accountId)
         {
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 return db.Notes
                     .Where(t => t.AccountId == accountId)
@@ -74,7 +86,7 @@ namespace WineProdTools.Data.Managers
                 AccountId = accountId 
             };
 
-            using (var db = new WineProdToolsContext())
+            using (var db = this._getNewContext())
             {
                 db.Notes.Add(note);
                 db.SaveChanges();

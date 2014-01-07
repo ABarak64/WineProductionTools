@@ -8,15 +8,15 @@ using WineProdTools.Data.EntityModels;
 
 namespace WineProdTools.Data
 {
-    internal class WineProdToolsContext : DbContext
+    internal class WineProdToolsContext : DbContext, IWineProdToolsContext
     {
         public WineProdToolsContext() : base("name=DefaultConnection") { }
 
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<Tank> Tanks { get; set; }
-        public DbSet<Note> Notes { get; set; }
-        public DbSet<TankContents> TankContents { get; set; }
-        public DbSet<TankContentsState> TankContentsStates { get; set; }
+        public IDbSet<Account> Accounts { get; set; }
+        public IDbSet<UserProfile> UserProfiles { get; set; }
+        public IDbSet<Tank> Tanks { get; set; }
+        public IDbSet<Note> Notes { get; set; }
+        public IDbSet<TankContents> TankContents { get; set; }
+        public IDbSet<TankContentsState> TankContentsStates { get; set; }
     }
 }
