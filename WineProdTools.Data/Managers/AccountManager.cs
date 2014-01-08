@@ -31,7 +31,7 @@ namespace WineProdTools.Data.Managers
             {
                 var newAccount = new Account { Name = "My Winery", Active = true };
                 db.Accounts.Add(newAccount);
-                db.SaveChanges();
+                db.SaveChanges();  // We need the db-generated account id.
                 var user = db.UserProfiles.Single(u => u.UserName == userName);
                 user.AccountId = newAccount.Id;
                 db.SaveChanges();

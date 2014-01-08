@@ -1,9 +1,15 @@
 ﻿<div class="row">
     <h2>Manage Tank</h2>
     <div class="col-md-2" ng-hide="loading">
-        <div class="list-group">
-          <a href="#/deletetank/{{tank[0].id}}" class="list-group-item">Delete Tank</a>
-          <a ng-show="tank[0].contents.id !== null" href="#/editcontents/{{tank[0].id}}" class="list-group-item">Edit Tank Contents</a>
+        <div class="nav navbar-default" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a ng-show="tank[0].contents.id !== null" href="#/editcontents/{{tank[0].id}}">Edit Tank Contents</a>
+                </li>
+                <li>
+                    <a href="#/deletetank/{{tank[0].id}}">Delete Tank</a>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1" ng-hide="loading">
