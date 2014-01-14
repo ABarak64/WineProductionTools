@@ -60,7 +60,9 @@
     <Compile Include="AccountManagerTests.cs" />
     <Compile Include="Mocks\FakeDbSet.cs" />
     <Compile Include="Mocks\FakeWineProdToolsContext.cs" />
+    <Compile Include="NoteManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TankManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WineProdTools.Data\WineProdTools.Data.csproj">

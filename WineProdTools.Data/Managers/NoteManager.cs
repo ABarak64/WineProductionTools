@@ -51,7 +51,7 @@ namespace WineProdTools.Data.Managers
             new TimeType 
             {
                 Title = "month",
-                divisorForSeconds = 60 * 60 * 24 * 30.5,
+                divisorForSeconds = 60 * 60 * 24 * 30,
                 Max = 12
             },
             new TimeType 
@@ -93,9 +93,9 @@ namespace WineProdTools.Data.Managers
             }
         }
 
-        public string DateTimeToTimeSinceNow(DateTime time)
+        public string TimeSince(DateTime time, DateTime endTime)
         {
-            var diff = (DateTime.Now - time).TotalSeconds;
+            var diff = (endTime - time).TotalSeconds;
             var correctType = _timeTypes.Where(t => Math.Floor(diff / t.divisorForSeconds) < t.Max).First();
             var numOfThisType = Math.Floor(diff / correctType.divisorForSeconds);
             return ((int)numOfThisType).ToString() +  ' ' + correctType.Title + (numOfThisType == 1 ? string.Empty : "s");

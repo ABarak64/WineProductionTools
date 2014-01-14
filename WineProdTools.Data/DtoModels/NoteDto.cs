@@ -22,7 +22,7 @@ namespace WineProdTools.Data.DtoModels
         {
             this.Id = note.Id;
             this.Comment = note.Comment;
-            this.TimeSinceCreated = new NoteManager().DateTimeToTimeSinceNow(note.DateCreated);
+            this.TimeSinceCreated = new NoteManager().TimeSince(note.DateCreated, DateTime.Now);
         }
     }
 }
