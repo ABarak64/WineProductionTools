@@ -59,6 +59,9 @@
     <Compile Include="EntityModels\TankContents.cs" />
     <Compile Include="EntityModels\TankContentsState.cs" />
     <Compile Include="IWineProdToolsContext.cs" />
+    <Compile Include="Managers\IAccountManager.cs" />
+    <Compile Include="Managers\INoteManager.cs" />
+    <Compile Include="Managers\ITankManager.cs" />
     <Compile Include="Managers\NoteManager.cs" />
     <Compile Include="Managers\TankManager.cs" />
     <Compile Include="Managers\UserManager.cs" />

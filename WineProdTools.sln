@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineProdTools.Data", "WineP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineProdTools.Data.Tests", "WineProdTools.Data.Tests\WineProdTools.Data.Tests.csproj", "{BEC540A7-12D6-41CF-9084-EFF4B61B9F7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineProdTools.Tests", "WineProdTools.Tests\WineProdTools.Tests.csproj", "{F1829943-55F4-47BB-96DD-28738586D932}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{BEC540A7-12D6-41CF-9084-EFF4B61B9F7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEC540A7-12D6-41CF-9084-EFF4B61B9F7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEC540A7-12D6-41CF-9084-EFF4B61B9F7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1829943-55F4-47BB-96DD-28738586D932}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1829943-55F4-47BB-96DD-28738586D932}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1829943-55F4-47BB-96DD-28738586D932}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1829943-55F4-47BB-96DD-28738586D932}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

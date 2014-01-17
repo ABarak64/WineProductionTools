@@ -13,10 +13,21 @@ namespace WineProdTools.Controllers
     [Authorize]
     public class NoteController : ApiController
     {
+        private readonly INoteManager _manager;
+
+        public NoteController()
+        {
+            this._manager = new NoteManager();
+        }
+
+        public NoteController(INoteManager manager)
+        {
+            this._manager = manager;
+        }
+
         public IEnumerable<NoteDto> GetSomeNotesAfterThisMany(int count)
         {
-            var mgr = new NoteManager();
-            return mgr.GetSomeNotesAfterThisManyForAccount(count, ((CustomPrincipal)User).AccountId);
+            return this._manager.GetSomeNotesAfterThisManyForAccount(count, ((CustomPrincipal)User).AccountId);
         }
 
         public HttpResponseMessage PostNote(NoteDto noteDto)
@@ -26,8 +37,7 @@ namespace WineProdTools.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
-            var mgr = new NoteManager();
-            mgr.AddNoteForAccount(noteDto, ((CustomPrincipal)User).AccountId);
+            this._manager.AddNoteForAccount(noteDto, ((CustomPrincipal)User).AccountId);
 
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, noteDto);
             return response;

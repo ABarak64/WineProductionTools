@@ -8,7 +8,7 @@ using WineProdTools.Data.EntityModels;
 
 namespace WineProdTools.Data.Managers
 {
-    public class NoteManager
+    public class NoteManager : INoteManager
     {
         private readonly Func<IWineProdToolsContext> _getNewContext;
 

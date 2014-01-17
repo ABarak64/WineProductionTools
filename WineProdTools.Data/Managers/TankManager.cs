@@ -10,7 +10,7 @@ using System.Security.Authentication;
 
 namespace WineProdTools.Data.Managers
 {
-    public class TankManager
+    public class TankManager : ITankManager
     {
         private readonly Func<IWineProdToolsContext> _getNewContext;
 

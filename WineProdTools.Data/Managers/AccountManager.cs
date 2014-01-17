@@ -8,7 +8,7 @@ using WineProdTools.Data.DtoModels;
 
 namespace WineProdTools.Data.Managers
 {
-    public class AccountManager
+    public class AccountManager : IAccountManager
     {
         private readonly Func<IWineProdToolsContext> _getNewContext;
 

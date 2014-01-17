@@ -13,10 +13,21 @@ namespace WineProdTools.Controllers
     [Authorize]
     public class AccountController : ApiController
     {
+        private readonly IAccountManager _manager;
+
+        public AccountController()
+        {
+            this._manager = new AccountManager();
+        }
+
+        public AccountController(IAccountManager manager)
+        {
+            this._manager = manager;
+        }
+
         public AccountDto GetAccount()
         {
-            var mgr = new AccountManager();
-            return mgr.GetAccount(((CustomPrincipal)User).AccountId);
+            return this._manager.GetAccount(((CustomPrincipal)User).AccountId);
         }
 
         public HttpResponseMessage PutAccount(AccountDto accountDto)
@@ -26,8 +37,7 @@ namespace WineProdTools.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
             accountDto.Id = ((CustomPrincipal)User).AccountId;
-            var mgr = new AccountManager();
-            mgr.UpdateAccount(accountDto);
+            this._manager.UpdateAccount(accountDto);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
     }

@@ -15,21 +15,31 @@ namespace WineProdTools.Controllers
     [Authorize]
     public class TankController : ApiController
     {
+        private readonly ITankManager _manager;
+
+        public TankController()
+        {
+            this._manager = new TankManager();
+        }
+
+        public TankController(ITankManager manager)
+        {
+            this._manager = manager;
+        }
+
         public IEnumerable<TankAndContentsDto> GetTanks()
         {
-            var mgr = new TankManager();
-            return mgr.GetTanksForAccount(((CustomPrincipal)User).AccountId);
+            return this._manager.GetTanksForAccount(((CustomPrincipal)User).AccountId);
         }
 
         public IEnumerable<TankContentsState> GetTankStates()
         {
-            return new TankManager().GetContentStates();
+            return this._manager.GetContentStates();
         }
 
         public TankAndContentsDto GetTank(Int64 tankId)
         {
-            var mgr = new TankManager();
-            var tank = mgr.GetTankForAccount(tankId, ((CustomPrincipal)User).AccountId);
+            var tank = this._manager.GetTankForAccount(tankId, ((CustomPrincipal)User).AccountId);
             if (tank == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -44,8 +54,7 @@ namespace WineProdTools.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
-            var mgr = new TankManager();
-            var id = mgr.AddTankForAccount(tankDto, ((CustomPrincipal)User).AccountId);
+            var id = this._manager.AddTankForAccount(tankDto, ((CustomPrincipal)User).AccountId);
             tankDto.Id = id;
 
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, tankDto);
@@ -55,10 +64,9 @@ namespace WineProdTools.Controllers
 
         public HttpResponseMessage DeleteTank(Int64 tankId)
         {
-            var mgr = new TankManager();
             try
             {
-                mgr.DeleteTankForAccount(tankId, ((CustomPrincipal)User).AccountId);
+                this._manager.DeleteTankForAccount(tankId, ((CustomPrincipal)User).AccountId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (AuthenticationException e)
@@ -74,10 +82,9 @@ namespace WineProdTools.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
-            var mgr = new TankManager();
             try
             {
-                mgr.UpdateTankForAccount(tankDto, ((CustomPrincipal)User).AccountId);
+                this._manager.UpdateTankForAccount(tankDto, ((CustomPrincipal)User).AccountId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (AuthenticationException e)
@@ -93,10 +100,9 @@ namespace WineProdTools.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
-            var mgr = new TankManager();
             try
             {
-                mgr.UpdateTankContentsForAccount(contentsDto, ((CustomPrincipal)User).AccountId);
+                this._manager.UpdateTankContentsForAccount(contentsDto, ((CustomPrincipal)User).AccountId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (AuthenticationException e)
@@ -113,10 +119,9 @@ namespace WineProdTools.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
-            var mgr = new TankManager();
             try
             {
-                mgr.TankContentsTransferForAccount(transferDto, ((CustomPrincipal)User).AccountId);
+                this._manager.TankContentsTransferForAccount(transferDto, ((CustomPrincipal)User).AccountId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (AuthenticationException e)
