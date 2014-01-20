@@ -3,8 +3,11 @@
 app.directive('loading', ['ngProgressLite', function (ngProgressLite) {
     return {
         restrict: 'A',
+        scope: {
+            isLoading: '='
+        },
         link: function (scope, element, attr) {
-            scope.$watch('loading', function (val) {
+            scope.$watch('isLoading', function (val) {
                 if (val) {
                     ngProgressLite.start();
                 }

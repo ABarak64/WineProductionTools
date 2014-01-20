@@ -11,7 +11,7 @@
 
 @if (@User.Identity.IsAuthenticated)
 {
-    <div ng-app="wineProductionToolsApp" loading="loading || waiting">
+    <div ng-app="wineProductionToolsApp" loading is-loading="loading || waiting">
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
