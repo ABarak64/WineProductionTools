@@ -42,6 +42,8 @@ namespace WineProdTools
                 "~/Scripts/app/controllers/emptytank.js",
                 "~/Scripts/app/controllers/filltank.js",
                 "~/Scripts/hamster.js",
+                "~/Scripts/app/directives/ngprogress-lite.js",
+                "~/Scripts/app/directives/loading.js",
                 "~/Scripts/app/directives/tankCanvas.js",
                 "~/Scripts/app/directives/angular-mousewheel.js",
                 "~/Scripts/app/directives/ng-infinite-scroll.js",
@@ -57,6 +59,7 @@ namespace WineProdTools
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
+                "~/Content/ngprogress-lite.css",
                 "~/Content/Site.css"));
         }
     }

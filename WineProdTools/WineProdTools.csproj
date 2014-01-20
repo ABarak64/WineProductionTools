@@ -200,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\ngprogress-lite.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -223,8 +224,10 @@
     <Content Include="Scripts\app\directives\angular-mousewheel.js" />
     <Content Include="Scripts\app\directives\btnRadio.js" />
     <Content Include="Scripts\app\directives\collapse.js" />
+    <Content Include="Scripts\app\directives\loading.js" />
     <Content Include="Scripts\app\directives\modelStateErrorDisplay.js" />
     <Content Include="Scripts\app\directives\ng-infinite-scroll.js" />
+    <Content Include="Scripts\app\directives\ngprogress-lite.js" />
     <Content Include="Scripts\app\directives\tankCanvas.js" />
     <Content Include="Scripts\app\services\accounts.js" />
     <Content Include="Scripts\app\services\notes.js" />
