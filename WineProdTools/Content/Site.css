@@ -11,15 +11,12 @@ body {
 }
 
 .jumbotron {
-    background-image: url(/images/tanks.jpg);
+    background-color: #911821;
     padding-top: 26px;
     font-size: 200%;
-    color: #911821;
+    color: #fff;
     position: absolute;
     width: 100%;
-    border-bottom-style: solid;
-    border-top-style: solid;
-    border-width: 6px;
 }
 
 .logoutForm {
