@@ -170,11 +170,12 @@ namespace WineProdTools.Data.Tests
             var context = new FakeWineProdToolsContext();
             var mgr = new NoteManager(() => { return context; });
 
-            var actual = mgr.TimeSince(DateTime.Now.AddMonths(-1), DateTime.Now);
+            var date = DateTime.Parse("2014-06-01T00:00:00");
+            var actual = mgr.TimeSince(date.AddMonths(-1), date);
             Assert.AreEqual("1 month", actual);
-            actual = mgr.TimeSince(DateTime.Now.AddMonths(-11), DateTime.Now);
+            actual = mgr.TimeSince(date.AddMonths(-11), date);
             Assert.AreEqual("11 months", actual);
-            actual = mgr.TimeSince(DateTime.Now.AddMonths(-12), DateTime.Now);
+            actual = mgr.TimeSince(date.AddMonths(-12), date);
             Assert.AreEqual("1 year", actual);
         }
 
