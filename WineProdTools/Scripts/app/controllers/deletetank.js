@@ -5,7 +5,7 @@ app.controller('DeleteTankCtrl', ['$scope', '$location', '$routeParams', 'Tanks'
     $scope.errors = null;
     $scope.tankId = $routeParams.tankId;
 
-    $scope.delete = function () {
+    $scope.deleteTank = function () {
         $scope.errors = { modelState: [] };
         $scope.$parent.waiting = true;
         Tanks.deleteTank($routeParams.tankId).success(function (data) {
